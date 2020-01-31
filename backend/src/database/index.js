@@ -1,13 +1,9 @@
 import Sequelize from 'sequelize';
-// import mongoose from 'mongoose';
 
-// import User from '../app/models/User';
-
+import User from '../app/models/User';
 import databaseConfig from '../config/database';
 
-// const models = [User];
-const models = [];
-
+const models = [User];
 class Database {
   constructor() {
     this.init();
