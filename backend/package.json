@@ -26,7 +26,9 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "inquirer": "^7.0.4",
     "nodemon": "^2.0.2",
+    "ora": "^4.0.3",
     "prettier": "^1.19.1",
     "sequelize-cli": "^5.5.1",
     "sucrase": "^3.12.1"
