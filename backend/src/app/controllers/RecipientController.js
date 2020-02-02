@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 
-import Recipient from '../models/Recipient';
+import { Recipient } from '../models';
 
 class RecipientController {
   async index(req, res) {
     const { page = 1, paginate = 10 } = req.query;
 
-    const helpOrder = await Recipient.paginate({
+    const recipients = await Recipient.paginate({
       // where: {
       //   answer: null,
       // },
@@ -16,7 +16,7 @@ class RecipientController {
       // order: [['createdAt', 'DESC']],
     });
 
-    return res.json(helpOrder);
+    return res.json(recipients);
   }
 
   async store(req, res) {

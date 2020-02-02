@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 
 import routes from './routes';
 
@@ -17,6 +18,10 @@ class App {
   middlewares() {
     this.server.use(cors());
     this.server.use(express.json());
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {
