@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 
-import { Deliverymans, File } from '../models';
+import { Deliveryman, File } from '../models';
 
-class DeliverymansController {
+class DeliverymanController {
   async index(req, res) {
     const { page = 1, paginate = 10 } = req.query;
 
-    const deliverymans = await Deliverymans.paginate({
+    const deliverymans = await Deliveryman.paginate({
       include: [
         {
           model: File,
@@ -35,7 +35,7 @@ class DeliverymansController {
       return res.status(400).json({ error: 'Validation fields' });
 
     const { email } = req.body;
-    const deliverymansExist = await Deliverymans.findOne({
+    const deliverymansExist = await Deliveryman.findOne({
       where: {
         email,
       },
@@ -45,7 +45,7 @@ class DeliverymansController {
       return res.status(400).json({ error: 'Deliveryman already exists.' });
     }
 
-    const { id, name, avatar_id } = await Deliverymans.create(req.body);
+    const { id, name, avatar_id } = await Deliveryman.create(req.body);
 
     return res.json({ id, name, email, avatar_id });
   }
@@ -53,7 +53,7 @@ class DeliverymansController {
   async show(req, res) {
     const { id } = req.params;
 
-    const deliveryman = await Deliverymans.findByPk(id, {
+    const deliveryman = await Deliveryman.findByPk(id, {
       include: [
         {
           model: File,
@@ -80,7 +80,7 @@ class DeliverymansController {
 
     const { id } = req.params;
 
-    const deliveryman = await Deliverymans.findByPk(id);
+    const deliveryman = await Deliveryman.findByPk(id);
 
     if (!deliveryman)
       return res.status(400).json({ error: 'Deliveryman not found' });
@@ -95,7 +95,7 @@ class DeliverymansController {
   async delete(req, res) {
     const { id } = req.params;
 
-    const deliveryman = await Deliverymans.findByPk(id);
+    const deliveryman = await Deliveryman.findByPk(id);
 
     if (!deliveryman) {
       return res.status(400).json({ error: 'Deliveryman does not exist' });
@@ -107,4 +107,4 @@ class DeliverymansController {
   }
 }
 
-export default new DeliverymansController();
+export default new DeliverymanController();

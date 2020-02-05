@@ -1,11 +1,13 @@
 import SessionController from './SessionController';
 import RecipientController from './RecipientController';
 import FileController from './FileController';
-import DeliverymansController from './DeliverymansController';
+import DeliverymanController from './DeliverymanController';
+import DeliveryController from './DeliveryController';
 
 export {
   SessionController,
   RecipientController,
   FileController,
-  DeliverymansController,
+  DeliverymanController,
+  DeliveryController,
 };

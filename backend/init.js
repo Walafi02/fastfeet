@@ -24,7 +24,7 @@ async function askParams(answers = {}) {
       name: 'APP_SECRET',
       default: answers.APP_SECRET,
       message: 'Value ENV APP_SECRET',
-      validate: i => (i.length >= 32 ? true : 'Pelo menos 32 letras'),
+      validate: i => (i.length > 0 ? true : 'O campo é Obrigatorio!'),
     },
     {
       name: 'MAIL_USER',
@@ -62,34 +62,38 @@ async function cleanup(params) {
   await replaceContent('./.env', [
     {
       from: 'APP_SECRET=',
-      to: `APP_SECRET=${params.APP_SECRET}`
+      to: `APP_SECRET=${params.APP_SECRET}`,
     },
     {
       from: 'MAIL_USER=',
-      to: `MAIL_USER=${params.MAIL_USER}`
+      to: `MAIL_USER=${params.MAIL_USER}`,
     },
     {
       from: 'MAIL_PASS=',
-      to: `MAIL_PASS=${params.MAIL_PASS}`
+      to: `MAIL_PASS=${params.MAIL_PASS}`,
     },
     {
       from: 'SENTRY_DSN=',
-      to: `SENTRY_DSN=${params.SENTRY_DSN}`
+      to: `SENTRY_DSN=${params.SENTRY_DSN}`,
     },
   ]);
 }
 
 async function replaceContent(file, replacers) {
   let content = await new Promise((resolve, reject) =>
-    fs.readFile(file, 'utf8', (err, data) => (err ? reject(err) : resolve(data)))
+    fs.readFile(file, 'utf8', (err, data) =>
+      err ? reject(err) : resolve(data)
+    )
   );
 
-  for (let replacer of replacers) {
+  for (const replacer of replacers) {
     content = content.replace(replacer.from, replacer.to);
   }
 
   await new Promise((resolve, reject) =>
-    fs.writeFile(file, content, (err, data) => (err ? reject(err) : resolve(data)))
+    fs.writeFile(file, content, (err, data) =>
+      err ? reject(err) : resolve(data)
+    )
   );
 }
 
@@ -107,7 +111,7 @@ async function init() {
 
   const params = await askParams();
 
-  let promise = cleanup(params);
+  const promise = cleanup(params);
   ora.promise(promise, 'Renomeando as variáveis de ambiente...');
   await promise;
 }

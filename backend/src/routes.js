@@ -8,7 +8,8 @@ import {
   SessionController,
   RecipientController,
   FileController,
-  DeliverymansController,
+  DeliverymanController,
+  DeliveryController,
 } from './app/controllers';
 
 const routes = new Router();
@@ -18,18 +19,24 @@ routes.post('/session', SessionController.store);
 
 routes.use(authMiddleware);
 
-routes.get('/recipients', RecipientController.index);
-routes.get('/recipients/:id', RecipientController.show);
-routes.post('/recipients', RecipientController.store);
-routes.put('/recipients/:id', RecipientController.update);
-routes.delete('/recipients/:id', RecipientController.delete);
-
 routes.post('/files', upload.single('file'), FileController.store);
 
-routes.get('/deliverymans', DeliverymansController.index);
-routes.post('/deliverymans', DeliverymansController.store);
-routes.get('/deliverymans/:id', DeliverymansController.show);
-routes.put('/deliverymans/:id', DeliverymansController.update);
-routes.delete('/deliverymans/:id', DeliverymansController.delete);
+routes.get('/recipient', RecipientController.index);
+routes.get('/recipient/:id', RecipientController.show);
+routes.post('/recipient', RecipientController.store);
+routes.put('/recipient/:id', RecipientController.update);
+routes.delete('/recipient/:id', RecipientController.delete);
+
+routes.get('/deliveryman', DeliverymanController.index);
+routes.post('/deliveryman', DeliverymanController.store);
+routes.get('/deliveryman/:id', DeliverymanController.show);
+routes.put('/deliveryman/:id', DeliverymanController.update);
+routes.delete('/deliveryman/:id', DeliverymanController.delete);
+
+routes.get('/delivery', DeliveryController.index);
+routes.post('/delivery', DeliveryController.store);
+routes.get('/delivery/:id', DeliveryController.show);
+routes.put('/delivery/:id', DeliveryController.update);
+routes.delete('/delivery/:id', DeliveryController.delete);
 
 export default routes;

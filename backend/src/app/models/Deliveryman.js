@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import SequelizePaginate from 'sequelize-paginate';
 
-class Deliverymans extends Model {
+class Deliveryman extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -21,5 +21,5 @@ class Deliverymans extends Model {
   }
 }
 
-SequelizePaginate.paginate(Deliverymans);
-export default Deliverymans;
+SequelizePaginate.paginate(Deliveryman);
+export default Deliveryman;

@@ -1,6 +1,7 @@
 import User from './User';
 import Recipient from './Recipient';
 import File from './File';
-import Deliverymans from './Deliverymans';
+import Deliveryman from './Deliveryman';
+import Delivery from './Delivery';
 
-export { User, Recipient, File, Deliverymans };
+export { User, Recipient, File, Deliveryman, Delivery };
