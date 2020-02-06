@@ -41,9 +41,8 @@ class DeliverymanController {
       },
     });
 
-    if (deliverymansExist) {
+    if (deliverymansExist)
       return res.status(400).json({ error: 'Deliveryman already exists.' });
-    }
 
     const { id, name, avatar_id } = await Deliveryman.create(req.body);
 
