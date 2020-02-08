@@ -10,12 +10,18 @@ import {
   FileController,
   DeliverymanController,
   DeliveryController,
+  DeliverymanDeliveriesController,
 } from './app/controllers';
 
 const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/session', SessionController.store);
+
+routes.get(
+  '/deliveryman/:id/deliveries/:status',
+  DeliverymanDeliveriesController.index
+);
 
 routes.use(authMiddleware);
 
