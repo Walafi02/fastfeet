@@ -7,6 +7,7 @@ class DeliverymanController {
     const { page = 1, paginate = 10 } = req.query;
 
     const deliverymans = await Deliveryman.paginate({
+      attributes: ['id', 'name', 'email'],
       include: [
         {
           model: File,
