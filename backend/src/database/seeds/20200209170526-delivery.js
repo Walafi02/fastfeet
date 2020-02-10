@@ -5,24 +5,24 @@ module.exports = {
     const deliveries = [];
 
     for (let i = 1; i <= 100; i++) {
-      const end_date = faker.random.boolean() ? new Date() : null;
-
-      const canceled_at =
-        faker.random.boolean() && faker.random.boolean() ? new Date() : null;
+      const start_date = faker.random.boolean() ? new Date() : null;
+      const status = start_date
+        ? faker.random.arrayElement(['done', 'canceled', null])
+        : null;
 
       deliveries.push({
         recipient_id: faker.random.number({
           min: 1,
-          max: 100,
+          max: 10,
         }),
         deliveryman_id: faker.random.number({
           min: 1,
-          max: 100,
+          max: 10,
         }),
         product: faker.commerce.productName(),
-        start_date: new Date(),
-        canceled_at,
-        end_date,
+        start_date,
+        canceled_at: status === 'done' ? new Date() : null,
+        end_date: status === 'canceled' ? new Date() : null,
         created_at: new Date(),
         updated_at: new Date(),
       });

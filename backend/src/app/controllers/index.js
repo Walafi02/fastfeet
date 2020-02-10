@@ -4,6 +4,8 @@ import FileController from './FileController';
 import DeliverymanController from './DeliverymanController';
 import DeliveryController from './DeliveryController';
 import DeliverymanDeliveriesController from './DeliverymanDeliveriesController';
+import DeliveryStartController from './DeliveryStartController';
+import DeliveryEndController from './DeliveryEndController';
 
 export {
   SessionController,
@@ -12,4 +14,6 @@ export {
   DeliverymanController,
   DeliveryController,
   DeliverymanDeliveriesController,
+  DeliveryStartController,
+  DeliveryEndController,
 };

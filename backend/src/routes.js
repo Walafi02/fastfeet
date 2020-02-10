@@ -11,6 +11,8 @@ import {
   DeliverymanController,
   DeliveryController,
   DeliverymanDeliveriesController,
+  DeliveryStartController,
+  DeliveryEndController,
 } from './app/controllers';
 
 const routes = new Router();
@@ -21,6 +23,16 @@ routes.post('/session', SessionController.store);
 routes.get(
   '/deliveryman/:id/deliveries/:status',
   DeliverymanDeliveriesController.index
+);
+
+routes.put(
+  '/deliveryman/:id/deliveries/:delivery_id/start',
+  DeliveryStartController.update
+);
+
+routes.put(
+  '/deliveryman/:id/deliveries/:delivery_id/end',
+  DeliveryEndController.update
 );
 
 routes.use(authMiddleware);
