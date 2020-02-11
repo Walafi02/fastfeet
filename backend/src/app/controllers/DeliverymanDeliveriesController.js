@@ -22,7 +22,7 @@ class DeliverymanDeliveriesController {
             : null,
         canceled_at: null,
       },
-      attributes: ['id', 'product', 'end_date', 'canceled_at'],
+      attributes: ['id', 'product', 'start_date', 'end_date'],
       include: [
         {
           model: Recipient,
