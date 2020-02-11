@@ -6,6 +6,7 @@ import DeliveryController from './DeliveryController';
 import DeliverymanDeliveriesController from './DeliverymanDeliveriesController';
 import DeliveryStartController from './DeliveryStartController';
 import DeliveryEndController from './DeliveryEndController';
+import DeliveryProblemsController from './DeliveryProblemsController';
 
 export {
   SessionController,
@@ -16,4 +17,5 @@ export {
   DeliverymanDeliveriesController,
   DeliveryStartController,
   DeliveryEndController,
+  DeliveryProblemsController,
 };

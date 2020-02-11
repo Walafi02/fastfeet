@@ -13,6 +13,7 @@ import {
   DeliverymanDeliveriesController,
   DeliveryStartController,
   DeliveryEndController,
+  DeliveryProblemsController,
 } from './app/controllers';
 
 const routes = new Router();
@@ -33,6 +34,23 @@ routes.put(
 routes.put(
   '/deliveryman/:id/deliveries/:delivery_id/end',
   DeliveryEndController.update
+);
+
+routes.post(
+  '/deliveryman/:id/delivery/:delivery_id/problems',
+  DeliveryProblemsController.store
+);
+
+routes.get(
+  '/recipient/:id/delivery/problems',
+  DeliveryProblemsController.index
+);
+
+routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
+
+routes.delete(
+  '/recipient/:id/delivery/:problems_id/cancel-delivery',
+  DeliveryProblemsController.delete
 );
 
 routes.use(authMiddleware);
