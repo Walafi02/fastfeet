@@ -90,10 +90,11 @@ class DeliveryProblemsController {
       ],
     });
 
-    // if (deliveryProblems.docs.length === 0)
-    //   return res.status(400).json({ error: 'Delivery Problems not found' });
+    if (!deliveryProblems)
+      return res.status(400).json({ error: 'Delivery Problems not found' });
 
-    // return res.json(deliveryProblems);
+    deliveryProblems.destroy();
+    console.log('envia o email');
     return res.json();
   }
 }
