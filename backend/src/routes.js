@@ -16,8 +16,17 @@ import {
   DeliveryProblemsController,
 } from './app/controllers';
 
+import Queue from './lib/Queue';
+import { DeliveryAlert } from './jobs';
+
 const routes = new Router();
 const upload = multer(multerConfig);
+
+routes.get('/teste-job', async (req, res) => {
+  await Queue.add(DeliveryAlert.key, { ok: true });
+
+  return res.json();
+});
 
 routes.post('/session', SessionController.store);
 

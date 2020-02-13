@@ -1,5 +1,6 @@
 #!/bin/sh
-yarn sequelize db:migrate:undo:all
-yarn sequelize db:migrate
-yarn sequelize db:seed:all
+yarn
+yarn migrate:undo
+yarn migrate
+yarn seed
 yarn dev

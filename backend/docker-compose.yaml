@@ -10,7 +10,7 @@ services:
       - /home/node/api/node_modules
     depends_on:
       - fastfeet-postgres
-      # - jobs-gympoint
+      - fastfeet-job
     networks:
       - app-connect
     ports:
@@ -30,10 +30,31 @@ services:
     ports:
       - '5432:5432'
 
+  fastfeet-job:
+    container_name: fastfeet-job
+    build: .
+    command: yarn queue
+    depends_on:
+      - fastfeet-redis
+    networks:
+      - app-connect
+
+  fastfeet-redis:
+    container_name: fastfeet-redis
+    image: redis:latest
+    environment:
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+    volumes:
+      - fastfeet-redis-data:/data
+    networks:
+      - app-connect
+    ports:
+      - "6379:6379"
 
 volumes:
   fastfeet-postgres-data:
-  # redis-gympoint-data:
+  fastfeet-redis-data:
 
 networks:
   app-connect:

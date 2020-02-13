@@ -5,11 +5,17 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server",
+    "prod": "yarn build && yarn start",
+    "queue": "nodemon src/queue.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "migrate:undo": "yarn sequelize db:migrate:undo:all",
+    "migrate": "yarn sequelize db:migrate",
+    "seed": "yarn sequelize db:seed:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bee-queue": "^1.2.3",
     "cors": "^2.8.5",
     "date-fns": "^2.9.0",
     "dotenv": "^8.2.0",
