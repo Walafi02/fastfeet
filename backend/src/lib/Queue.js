@@ -1,7 +1,7 @@
 import Bee from 'bee-queue';
 import configRedis from '../config/redis';
 
-import DeliveryAlert from '../jobs/DeliveryAlert';
+import { DeliveryAlert } from '../jobs';
 
 const jobs = [DeliveryAlert];
 
@@ -36,7 +36,7 @@ class Queue {
   }
 
   handleFailure(job, err) {
-    console.log(`Queue ${job.queue.name}: FAILED`, err);
+    console.log(`Queue ${job.queue.name}: FAILED`, err); // eslint-disable-line
   }
 }
 

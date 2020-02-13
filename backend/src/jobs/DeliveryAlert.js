@@ -1,10 +1,21 @@
+import Mail from '../lib/Mail';
+
 class DeliveryAlert {
   get key() {
     return 'DeliveryAlert';
   }
 
   async handle({ data }) {
-    await console.log('data', data);
+    const { name } = data;
+
+    await Mail.sendMail({
+      to: `Email <email@teste.com>`,
+      subject: 'Nova Entrega',
+      template: 'deliveryAlert',
+      context: {
+        name,
+      },
+    });
   }
 }
 
