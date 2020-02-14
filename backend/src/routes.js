@@ -23,7 +23,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.get('/teste-job', async (req, res) => {
-  await Queue.add(DeliveryAlert.key, { ok: true });
+  await Queue.add(DeliveryAlert.key, { name: 'Walafi' });
 
   return res.json();
 });

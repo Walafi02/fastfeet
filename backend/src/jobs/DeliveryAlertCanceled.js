@@ -1,26 +1,25 @@
 import Mail from '../lib/Mail';
 
-class DeliveryAlert {
+class DeliveryAlertCanceled {
   get key() {
-    return 'DeliveryAlert';
+    return 'DeliveryAlertCanceled';
   }
 
   async handle({ data }) {
-    const { product, deliveryman, recipient } = data;
+    const { product, deliveryman } = data;
 
     const { email } = deliveryman;
 
     await Mail.sendMail({
       to: `Email <${email}>`,
-      subject: 'Nova Entrega',
-      template: 'deliveryAlert',
+      subject: 'Cancelamento de Entrega',
+      template: 'deliveryAlertCanceled',
       context: {
         product,
         deliveryman,
-        recipient,
       },
     });
   }
 }
 
-export default new DeliveryAlert();
+export default new DeliveryAlertCanceled();

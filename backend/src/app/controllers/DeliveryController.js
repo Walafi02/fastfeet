@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import Queue from '../../lib/Queue';
+import { DeliveryAlert } from '../../jobs';
 
 import { Delivery, Recipient, Deliveryman, File } from '../models';
 
@@ -60,7 +62,7 @@ class DeliveryController {
       deliveryman_id,
     });
 
-    // console.log("enviar um email")
+    await Queue.add(DeliveryAlert.key, { product, deliveryman, recipient });
 
     return res.json({ id, product, recipient_id, deliveryman_id });
   }

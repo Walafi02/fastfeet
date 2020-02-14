@@ -1,3 +1,4 @@
 import DeliveryAlert from './DeliveryAlert';
+import DeliveryAlertCanceled from './DeliveryAlertCanceled';
 
-export { DeliveryAlert };
+export { DeliveryAlert, DeliveryAlertCanceled };

@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 import { Delivery, Deliveryman, DeliveryProblems, Recipient } from '../models';
 
+import Queue from '../../lib/Queue';
+import { DeliveryAlertCanceled } from '../../jobs';
+
 class DeliveryProblemsController {
   async index(req, res) {
     const { id } = req.params;
@@ -93,8 +96,20 @@ class DeliveryProblemsController {
     if (!deliveryProblems)
       return res.status(400).json({ error: 'Delivery Problems not found' });
 
-    deliveryProblems.destroy();
-    console.log('envia o email');
+    const { delivery } = deliveryProblems;
+
+    const deliveryman = await Deliveryman.findByPk(delivery.deliveryman_id);
+
+    if (!deliveryman)
+      return res.status(400).json({ error: 'Deliveryman not found' });
+
+    // deliveryProblems.destroy();
+
+    // await Queue.add(DeliveryAlertCanceled.key, {
+    //   product: delivery.product,
+    //   deliveryman,
+    // });
+
     return res.json();
   }
 }
