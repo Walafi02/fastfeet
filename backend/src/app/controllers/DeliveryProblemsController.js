@@ -6,7 +6,7 @@ import { DeliveryAlertCanceled } from '../../jobs';
 
 class DeliveryProblemsController {
   async index(req, res) {
-    const { id } = req.params;
+    const { recipient_id } = req.params;
 
     const deliveryProblems = await DeliveryProblems.paginate({
       include: [
@@ -14,7 +14,7 @@ class DeliveryProblemsController {
           model: Delivery,
           as: 'delivery',
           required: true,
-          where: { recipient_id: id },
+          where: { recipient_id },
         },
       ],
     });
@@ -23,9 +23,9 @@ class DeliveryProblemsController {
   }
 
   async store(req, res) {
-    const { id, delivery_id } = req.params;
+    const { deliveryman_id, delivery_id } = req.params;
 
-    const deliveryman = await Deliveryman.findByPk(id);
+    const deliveryman = await Deliveryman.findByPk(deliveryman_id);
 
     if (!deliveryman)
       return res.status(400).json({ error: 'Deliveryman not found' });
@@ -33,7 +33,7 @@ class DeliveryProblemsController {
     const delivery = await Delivery.findOne({
       where: {
         id: delivery_id,
-        deliveryman_id: id,
+        deliveryman_id,
       },
     });
 
@@ -72,9 +72,9 @@ class DeliveryProblemsController {
   }
 
   async delete(req, res) {
-    const { id, problems_id } = req.params;
+    const { recipient_id, problems_id } = req.params;
 
-    const recipient = await Recipient.findByPk(id);
+    const recipient = await Recipient.findByPk(recipient_id);
 
     if (!recipient)
       return res.status(400).json({ error: 'Recipient not found' });
@@ -88,7 +88,7 @@ class DeliveryProblemsController {
           model: Delivery,
           as: 'delivery',
           required: true,
-          where: { recipient_id: id },
+          where: { recipient_id },
         },
       ],
     });
@@ -103,12 +103,12 @@ class DeliveryProblemsController {
     if (!deliveryman)
       return res.status(400).json({ error: 'Deliveryman not found' });
 
-    // deliveryProblems.destroy();
+    deliveryProblems.destroy();
 
-    // await Queue.add(DeliveryAlertCanceled.key, {
-    //   product: delivery.product,
-    //   deliveryman,
-    // });
+    await Queue.add(DeliveryAlertCanceled.key, {
+      product: delivery.product,
+      deliveryman,
+    });
 
     return res.json();
   }

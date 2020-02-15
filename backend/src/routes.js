@@ -46,19 +46,19 @@ routes.put(
 );
 
 routes.post(
-  '/deliveryman/:id/delivery/:delivery_id/problems',
+  '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
   DeliveryProblemsController.store
 );
 
 routes.get(
-  '/recipient/:id/delivery/problems',
+  '/recipient/:recipient_id/delivery/problems',
   DeliveryProblemsController.index
 );
 
 routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
 
 routes.delete(
-  '/recipient/:id/delivery/:problems_id/cancel-delivery',
+  '/recipient/:recipient_id/delivery/:problems_id/cancel-delivery',
   DeliveryProblemsController.delete
 );
 
