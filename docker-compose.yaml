@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  fastfeet-frontend:
+    container_name: fastfeet-frontend
+    build: ./frontend
+    entrypoint: ['./init.sh']
+    volumes:
+      - ./frontend:/home/node/api
+      - /home/node/api/node_modules
+    depends_on:
+      - fastfeet-backend
+    networks:
+      - app-connect
+    ports:
+      - '3000:3000'
+
+  fastfeet-backend:
+    container_name: fastfeet-backend
+    build: './backend'
+    entrypoint: ['./init.sh']
+    volumes:
+      - ./backend:/home/node/api
+      - /home/node/api/node_modules
+    depends_on:
+      - fastfeet-postgres
+      - fastfeet-job
+    networks:
+      - app-connect
+    ports:
+      - '3333:3333'
+
+  fastfeet-postgres:
+    container_name: fastfeet-postgres
+    image: postgres:11
+    volumes:
+      - fastfeet-postgres-data:/data
+    environment:
+      POSTGRES_DB: fastfeet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+    networks:
+      - app-connect
+    ports:
+      - '5432:5432'
+
+  fastfeet-job:
+    container_name: fastfeet-job
+    build: './backend'
+    command: yarn queue
+    depends_on:
+      - fastfeet-redis
+    networks:
+      - app-connect
+
+  fastfeet-redis:
+    container_name: fastfeet-redis
+    image: redis:latest
+    volumes:
+      - fastfeet-redis-data:/data
+    networks:
+      - app-connect
+    ports:
+      - "6379:6379"
+
+volumes:
+  fastfeet-postgres-data:
+  fastfeet-redis-data:
+
+networks:
+  app-connect:
+      driver: bridge

@@ -12,4 +12,4 @@ RUN yarn
 
 COPY --chown=node:node . .
 
-EXPOSE 3333
+EXPOSE 3000
