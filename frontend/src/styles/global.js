@@ -35,4 +35,29 @@ export default createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  .flex {
+    display: flex;
+
+    &-column { flex-direction: column }
+
+    &-grow {
+      flex-grow: 1;
+    }
+
+    /* Justification */
+    &-between { justify-content: space-between }
+    &-around { justify-content: space-around }
+    &-justify-start {justify-content: flex-start}
+    &-justify-end {justify-content: flex-end}
+    &-justify-center {justify-content: center}
+    &-space-evenly {justify-content: space-evenly}
+
+    /* Alignment */
+    &-start   { align-items: flex-start }
+    &-center  { align-items: center }
+    &-end     { align-items: flex-end }
+    &-stretch { align-items: stretch }
+    &-wrap    { flex-wrap: wrap }
+  }
 `;
