@@ -1,11 +1,15 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
 
-// import { Container } from './styles';
+import Routes from '~/routes';
+import history from '~/services/history';
+import GlobalStyles from '~/styles/global';
 
 export default function src() {
   return (
-    <div>
-      <strong>okkkkkkkk</strong>
-    </div>
-  )
+    <Router history={history}>
+      <Routes />
+      <GlobalStyles />
+    </Router>
+  );
 }
