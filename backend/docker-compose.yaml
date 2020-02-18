@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  fastfeet-nodejs:
-    container_name: fastfeet-nodejs
+  fastfeet-api:
+    container_name: fastfeet-api
     build: '.'
     entrypoint: ['./init.sh']
     volumes:
@@ -10,7 +10,8 @@ services:
       - /home/node/api/node_modules
     depends_on:
       - fastfeet-postgres
-      - fastfeet-job
+      - fastfeet-redis
+      # - fastfeet-job
     networks:
       - app-connect
     ports:
@@ -30,14 +31,14 @@ services:
     ports:
       - '5432:5432'
 
-  fastfeet-job:
-    container_name: fastfeet-job
-    build: .
-    command: yarn queue
-    depends_on:
-      - fastfeet-redis
-    networks:
-      - app-connect
+  # fastfeet-job:
+  #   container_name: fastfeet-job
+  #   build: .
+  #   command: yarn queue
+  #   depends_on:
+  #     - fastfeet-redis
+  #   networks:
+  #     - app-connect
 
   fastfeet-redis:
     container_name: fastfeet-redis
