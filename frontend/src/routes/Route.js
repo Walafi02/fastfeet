@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import AuthLayout from '~/_layouts/auth';
 import DefaultLayout from '~/_layouts/default';
 
+import { store } from '~/store';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  // const { singed } = store.getState().auth;
-  const singed = false;
+  const { singed } = store.getState().auth;
 
   if (!singed && isPrivate) return <Redirect to="/" />;
 
