@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
-// import urls from '~/constants/urls';
 import entities from '~/constants/entities';
+import crudActions from '~/constants/crudActions';
+import TableActions from './TableActions';
+import Table from './Table';
+import Pagination from './Pagination';
 
-// import { Container } from './styles';
-
-export default function CRUDTable({ entity }) {
+export default function CRUDTable({ entity, actions, searchBar }) {
   const [docs, setDocs] = useState([]);
   const [total, setTotal] = useState(null);
   const [pages, setPages] = useState(null);
@@ -29,9 +30,19 @@ export default function CRUDTable({ entity }) {
     refresh();
   }, [entity]);
 
-  return <div>CRUDTable</div>;
+  return (
+    <div>
+      {actions.includes(crudActions.CREATE) && (
+        <TableActions searchBar={searchBar} />
+      )}
+      <Table />
+      <Pagination />
+    </div>
+  );
 }
 
 CRUDTable.propTypes = {
   entity: PropTypes.string.isRequired,
+  actions: PropTypes.arrayOf(PropTypes.string),
+  searchBar: PropTypes.string.isRequired,
 };

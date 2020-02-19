@@ -1,12 +1,17 @@
 import React from 'react';
 import Card from '~/components/Card';
-import CRUDTable from '~/components/CRUDTable';
+import CrudTable from '~/components/CrudTable';
+import crudActions from '~/constants/crudActions';
 
 export default function Deliveries() {
   return (
     <Card>
       <h2>Gerenciando encomendas</h2>
-      <CRUDTable entity="deliveries" />
+      <CrudTable
+        entity="deliveries"
+        actions={[crudActions.CREATE, crudActions.DELETE, crudActions.UPDATE]}
+        searchBar=""
+      />
     </Card>
   );
 }

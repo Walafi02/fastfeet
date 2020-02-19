@@ -8,7 +8,7 @@ export const Content = styled.div`
   height: 64px;
   padding: 0 34px;
   max-width: 1300px;
-  min-width: 950px;
+  min-width: 1000px;
   margin: 0 auto;
 
   nav {

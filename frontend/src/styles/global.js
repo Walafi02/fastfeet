@@ -60,4 +60,11 @@ export default createGlobalStyle`
     &-stretch { align-items: stretch }
     &-wrap    { flex-wrap: wrap }
   }
+
+  .button {
+    &-primary{
+      background: #7D40E7;
+      color: #fff;
+    }
+  }
 `;

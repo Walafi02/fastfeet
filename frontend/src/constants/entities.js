@@ -6,6 +6,13 @@ const entities = {
     },
     columns: [],
   },
+  deliveryman: {
+    urls: {
+      get: '/deliveryman',
+      show: '/deliveryman/:id',
+    },
+    columns: [],
+  },
 };
 
 export default entities;
