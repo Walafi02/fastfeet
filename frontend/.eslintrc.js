@@ -44,7 +44,9 @@ module.exports = {
     "no-alert": "off",
     "radix": "off",
     "react/forbid-prop-types": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "prefer-destructuring": "off"
   },
   settings: {
     "import/resolver": {
