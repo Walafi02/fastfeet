@@ -1,11 +1,12 @@
 import React from 'react';
+import Card from '~/components/Card';
 
 // import { Container } from './styles';
 
 export default function Recipient() {
   return (
-    <div>
-      <h1>recipient</h1>
-    </div>
+    <Card>
+      <h2>Gerenciando destinatários</h2>
+    </Card>
   );
 }

@@ -1,11 +1,12 @@
 import React from 'react';
+import Card from '~/components/Card';
 
 // import { Container } from './styles';
 
 export default function Problems() {
   return (
-    <div>
-      <h1>Problems</h1>
-    </div>
+    <Card>
+      <h2>Problemas na entrega</h2>
+    </Card>
   );
 }

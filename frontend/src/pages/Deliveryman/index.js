@@ -1,11 +1,12 @@
 import React from 'react';
+import Card from '~/components/Card';
 
 // import { Container } from './styles';
 
 export default function Deliveryman() {
   return (
-    <div>
-      <h1>deliveryman</h1>
-    </div>
+    <Card>
+      <h2>Gerenciando entregadores</h2>
+    </Card>
   );
 }
