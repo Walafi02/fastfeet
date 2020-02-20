@@ -56,6 +56,7 @@ export const Profile = styled.div`
     text-align: right;
     border: 0;
     background: transparent;
+    cursor: pointer;
 
     &:hover {
       opacity: 0.7;

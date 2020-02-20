@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MdMoreHoriz } from 'react-icons/md';
 import renders from '../renders';
 
 export default function Item({ columns, item }) {
@@ -8,7 +9,13 @@ export default function Item({ columns, item }) {
       {columns.map(column => (
         <td key={column.field}>{renders.render(item, column)}</td>
       ))}
-      <td>...</td>
+      <td>
+        <MdMoreHoriz
+          onClick={() => console.log('ok')}
+          size={30}
+          color="#C6C6C6"
+        />
+      </td>
     </tr>
   );
 }

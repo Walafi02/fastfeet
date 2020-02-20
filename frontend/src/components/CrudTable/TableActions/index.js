@@ -1,13 +1,13 @@
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import Button from '~/components/Button';
-// import { Container } from './styles';
 import SearchBar from '~/components/SearchBar';
+import { Container } from './styles';
 
 export default function TableActions() {
   const handleclick = () => {};
   return (
-    <div className="flex flex-between">
+    <Container className="flex flex-between">
       <SearchBar
         Icon={MdSearch}
         // value={name}
@@ -18,6 +18,6 @@ export default function TableActions() {
         text="Cadastrar"
         onClick={handleclick}
       />
-    </div>
+    </Container>
   );
 }
