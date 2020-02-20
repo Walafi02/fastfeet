@@ -14,12 +14,19 @@ class DeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city', 'state'],
         },
         {
           model: Deliveryman,
           as: 'deliveryman',
           attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['url'],
+            },
+          ],
         },
         {
           model: File,
