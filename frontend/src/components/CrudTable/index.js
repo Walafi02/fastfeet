@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
@@ -35,7 +36,7 @@ export default function CRUDTable({ entity, actions, searchBar }) {
       {actions.includes(crudActions.CREATE) && (
         <TableActions searchBar={searchBar} />
       )}
-      <Table />
+      <Table columns={columns} data={docs} />
       <Pagination />
     </div>
   );
