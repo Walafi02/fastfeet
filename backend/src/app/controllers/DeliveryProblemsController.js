@@ -6,17 +6,12 @@ import { DeliveryAlertCanceled } from '../../jobs';
 
 class DeliveryProblemsController {
   async index(req, res) {
-    const { recipient_id } = req.params;
+    const { page = 1, paginate = 10 } = req.query;
 
     const deliveryProblems = await DeliveryProblems.paginate({
-      include: [
-        {
-          model: Delivery,
-          as: 'delivery',
-          required: true,
-          where: { recipient_id },
-        },
-      ],
+      attributes: ['id', 'description'],
+      page,
+      paginate,
     });
 
     return res.json(deliveryProblems);

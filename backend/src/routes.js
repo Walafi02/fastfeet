@@ -21,39 +21,36 @@ const upload = multer(multerConfig);
 
 routes.post('/session', SessionController.store);
 
-routes.get(
-  '/deliveryman/:id/deliveries/:status',
-  DeliverymanDeliveriesController.index
-);
+// routes.get(
+//   '/deliveryman/:id/deliveries/:status',
+//   DeliverymanDeliveriesController.index
+// );
 
-routes.put(
-  '/deliveryman/:id/deliveries/:delivery_id/start',
-  DeliveryStartController.update
-);
+// routes.put(
+//   '/deliveryman/:id/deliveries/:delivery_id/start',
+//   DeliveryStartController.update
+// );
 
-routes.put(
-  '/deliveryman/:id/deliveries/:delivery_id/end',
-  DeliveryEndController.update
-);
+// routes.put(
+//   '/deliveryman/:id/deliveries/:delivery_id/end',
+//   DeliveryEndController.update
+// );
 
-routes.post(
-  '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
-  DeliveryProblemsController.store
-);
+// routes.post(
+//   '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
+//   DeliveryProblemsController.store
+// );
 
-routes.get(
-  '/recipient/:recipient_id/delivery/problems',
-  DeliveryProblemsController.index
-);
+// routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
 
-routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
-
-routes.delete(
-  '/recipient/:recipient_id/delivery/:problems_id/cancel-delivery',
-  DeliveryProblemsController.delete
-);
+// routes.delete(
+//   '/recipient/:recipient_id/delivery/:problems_id/cancel-delivery',
+//   DeliveryProblemsController.delete
+// );
 
 routes.use(authMiddleware);
+
+routes.get('/delivery/problems', DeliveryProblemsController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

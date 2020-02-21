@@ -5,7 +5,10 @@ import SearchBar from '~/components/SearchBar';
 import { Container } from './styles';
 
 export default function TableActions() {
-  const handleclick = () => {};
+  const handleClick = () => {
+    window.location += '/new';
+  };
+
   return (
     <Container className="flex flex-between">
       <SearchBar
@@ -16,7 +19,7 @@ export default function TableActions() {
       <Button
         className="button-primary"
         text="Cadastrar"
-        onClick={handleclick}
+        onClick={handleClick}
       />
     </Container>
   );

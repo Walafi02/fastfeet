@@ -1,18 +1,4 @@
-import React from 'react';
-import Card from '~/components/Card';
-import CrudTable from '~/components/CrudTable';
-import crudActions from '~/constants/crudActions';
+import RecipientList from './List';
+import RecipientForm from './Form';
 
-export default function Recipient() {
-  return (
-    <Card>
-      <h2>Gerenciando destinatários</h2>
-      <CrudTable
-        entity="recipient"
-        actions={[crudActions.CREATE]}
-        // actions={[crudActions.CREATE, crudActions.DELETE, crudActions.UPDATE]}
-        searchBar=""
-      />
-    </Card>
-  );
-}
+export { RecipientList, RecipientForm };

@@ -3,19 +3,33 @@ import { Switch } from 'react-router-dom';
 import Route from './Route';
 
 import SignIn from '~/pages/SignIn';
-import Deliveries from '~/pages/Deliveries';
-import Deliveryman from '~/pages/Deliveryman';
-import Recipient from '~/pages/Recipient';
-import Problems from '~/pages/Problems';
+import { DeliveryForm, DeliveryList } from '~/pages/Deliveries';
+
+import { DeliverymanForm, DeliverymanList } from '~/pages/Deliveryman';
+
+import { RecipientForm, RecipientList } from '~/pages/Recipient';
+import { ProblemsList } from '~/pages/Problems';
 
 export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
-      <Route path="/deliveries" component={Deliveries} isPrivate />
-      <Route path="/deliveryman" component={Deliveryman} isPrivate />
-      <Route path="/recipient" component={Recipient} isPrivate />
-      <Route path="/problems" component={Problems} isPrivate />
+
+      <Route path="/deliveries" exact component={DeliveryList} isPrivate />
+      <Route path="/deliveries/new" exact component={DeliveryForm} isPrivate />
+
+      <Route path="/deliveryman" exact component={DeliverymanList} isPrivate />
+      <Route
+        path="/deliveryman/new"
+        exact
+        component={DeliverymanForm}
+        isPrivate
+      />
+
+      <Route path="/recipient" exact component={RecipientList} isPrivate />
+      <Route path="/recipient/new" exact component={RecipientForm} isPrivate />
+
+      <Route path="/problems" exact component={ProblemsList} isPrivate />
     </Switch>
   );
 }

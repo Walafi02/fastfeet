@@ -37,6 +37,15 @@ const entities = {
       { field: 'address', label: 'Endereço', type: 'fulltext' },
     ],
   },
+  problems: {
+    urls: {
+      get: '/delivery/problems',
+    },
+    columns: [
+      { field: 'id', label: 'ID', type: 'text' },
+      { field: 'description', label: 'Descrição', type: 'fulltext' },
+    ],
+  },
 };
 
 export default entities;
