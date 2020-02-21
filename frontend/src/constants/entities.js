@@ -19,14 +19,23 @@ const entities = {
       get: '/deliveryman',
       show: '/deliveryman/:id',
     },
-    columns: [{ field: 'id', label: 'ID', type: 'text' }],
+    columns: [
+      { field: 'id', label: 'ID', type: 'text' },
+      { field: 'avatar.url', label: 'Foto', type: 'avatar' },
+      { field: 'name', label: 'Nome', type: 'text' },
+      { field: 'email', label: 'Email', type: 'fulltext' },
+    ],
   },
   recipient: {
     urls: {
       get: '/recipient',
       show: '/recipient/:id',
     },
-    columns: [{ field: 'id', label: 'ID', type: 'text' }],
+    columns: [
+      { field: 'id', label: 'ID', type: 'text' },
+      { field: 'name', label: 'Nome', type: 'text' },
+      { field: 'address', label: 'Endereço', type: 'fulltext' },
+    ],
   },
 };
 

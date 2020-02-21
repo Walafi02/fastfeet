@@ -9,7 +9,14 @@ class DeliveryController {
     const { page = 1, paginate = 10 } = req.query;
 
     const deliverys = await Delivery.paginate({
-      attributes: ['id', 'product'],
+      attributes: [
+        'id',
+        'product',
+        'status',
+        'canceled_at',
+        'start_date',
+        'end_date',
+      ],
       include: [
         {
           model: Recipient,

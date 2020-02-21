@@ -7,10 +7,15 @@ class RecipientController {
     const { page = 1, paginate = 10 } = req.query;
 
     const recipients = await Recipient.paginate({
-      // where: {
-      //   answer: null,
-      // },
-      // attributes: ['id', 'question'],
+      attributes: [
+        'id',
+        'name',
+        'address',
+        'street',
+        'number',
+        'city',
+        'state',
+      ],
       page,
       paginate,
       // order: [['createdAt', 'DESC']],

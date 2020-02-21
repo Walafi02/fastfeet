@@ -8,7 +8,7 @@ const TextRender = ({ data, column }) => {
 
   return text ? (
     <span title={text}>
-      {text.length > 20 ? `${String(text).slice(0, 25)}...` : text}
+      {text.length > 20 ? `${String(text).slice(0, 20)}...` : text}
     </span>
   ) : (
     <span>Indisponivel</span>

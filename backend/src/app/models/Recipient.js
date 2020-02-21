@@ -12,6 +12,14 @@ class Recipient extends Model {
         state: Sequelize.STRING,
         city: Sequelize.STRING,
         cep: Sequelize.INTEGER,
+        address: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return `Rua ${this.street}, ${this.number || 'S/N'}, ${
+              this.city
+            } - ${this.state}`;
+          },
+        },
       },
       {
         sequelize,

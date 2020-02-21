@@ -3,21 +3,20 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function Driver({ name, avatar }) {
+export default function Avatar({ name, avatar }) {
   return (
-    <Container title={name}>
-      <img
+    <>
+      <Container
         src={
           avatar ? avatar.url : `https://api.adorable.io/avatar/50/${name}.png`
         }
         alt="Avatar"
       />
-      {name.length > 20 ? `${String(name).slice(0, 25)}...` : name}
-    </Container>
+    </>
   );
 }
 
-Driver.propTypes = {
+Avatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatar: PropTypes.array,
 };
