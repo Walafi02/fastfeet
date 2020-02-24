@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MdMoreHoriz } from 'react-icons/md';
+// import { MdMoreHoriz } from 'react-icons/md';
 import renders from '../renders';
+import Dropdown from '~/components/Dropdown';
 
 export default function Item({ columns, item }) {
   return (
@@ -10,11 +11,12 @@ export default function Item({ columns, item }) {
         <td key={column.field}>{renders.render(item, column)}</td>
       ))}
       <td>
-        <MdMoreHoriz
+        <Dropdown />
+        {/* <MdMoreHoriz
           onClick={() => console.log('ok')}
           size={30}
           color="#C6C6C6"
-        />
+        /> */}
       </td>
     </tr>
   );

@@ -1,14 +1,10 @@
 import React from 'react';
-import { MdSearch } from 'react-icons/md';
+import { MdSearch, MdAdd } from 'react-icons/md';
 import Button from '~/components/Button';
 import SearchBar from '~/components/SearchBar';
 import { Container } from './styles';
 
-export default function TableActions() {
-  const handleClick = () => {
-    window.location += '/new';
-  };
-
+export default function TableActions({ onclickNew }) {
   return (
     <Container className="flex flex-between">
       <SearchBar
@@ -17,9 +13,10 @@ export default function TableActions() {
         // onChange={e => setName(e.target.value)}
       />
       <Button
+        Icon={MdAdd}
         className="button-primary"
         text="Cadastrar"
-        onClick={handleClick}
+        onClick={onclickNew}
       />
     </Container>
   );

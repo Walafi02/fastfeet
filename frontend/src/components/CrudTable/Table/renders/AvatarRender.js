@@ -1,7 +1,4 @@
-// AvatarRendar
-
 import React, { memo } from 'react';
-import _get from 'lodash/get';
 import Avatar from '~/components/Avatar';
 
 const AvatarRendar = ({ data }) => {

@@ -45,7 +45,6 @@ module.exports = {
     "radix": "off",
     "react/forbid-prop-types": "off",
     "no-unused-expressions": "off",
-    "react-hooks/exhaustive-deps": "off",
     "prefer-destructuring": "off"
   },
   settings: {

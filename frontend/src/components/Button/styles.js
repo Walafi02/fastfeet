@@ -11,6 +11,7 @@ export const Container = styled.button`
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 6px 12px;
+  margin-left: 12px;
   transition: opacity 0.1s;
   cursor: pointer;
 

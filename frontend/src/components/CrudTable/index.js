@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import history from '~/services/history';
 import api from '~/services/api';
 import entities from '~/constants/entities';
 import crudActions from '~/constants/crudActions';
@@ -15,26 +16,30 @@ export default function CRUDTable({ entity, actions, searchBar }) {
 
   const { urls, columns } = entities[entity];
 
-  async function refresh() {
-    try {
-      const { data } = await api.get(urls.get);
-
-      setDocs(data.docs);
-      setPages(data.pages);
-      setTotal(data.total);
-    } catch (error) {
-      console.tron.error('error');
-    }
+  function handleClickNew() {
+    history.push(`/${entity}/new`);
   }
 
   useEffect(() => {
+    async function refresh() {
+      try {
+        const { data } = await api.get(urls.get);
+
+        setDocs(data.docs);
+        setPages(data.pages);
+        setTotal(data.total);
+      } catch (error) {
+        console.tron.error('error');
+      }
+    }
+
     refresh();
-  }, [entity]);
+  }, [entity, urls.get]);
 
   return (
     <div>
       {actions.includes(crudActions.CREATE) && (
-        <TableActions searchBar={searchBar} />
+        <TableActions searchBar={searchBar} onclickNew={handleClickNew} />
       )}
       <Table columns={columns} data={docs} />
       <Pagination />
