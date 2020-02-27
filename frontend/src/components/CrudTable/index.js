@@ -41,7 +41,7 @@ export default function CRUDTable({ entity, actions, searchBar }) {
       {actions.includes(crudActions.CREATE) && (
         <TableActions searchBar={searchBar} onclickNew={handleClickNew} />
       )}
-      <Table columns={columns} data={docs} />
+      <Table columns={columns} data={docs} actions={actions} />
       <Pagination />
     </div>
   );

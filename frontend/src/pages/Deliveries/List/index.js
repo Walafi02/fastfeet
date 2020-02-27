@@ -9,7 +9,12 @@ export default function DeliveryList() {
       <h2>Gerenciando encomendas</h2>
       <CrudTable
         entity="deliveries"
-        actions={[crudActions.CREATE, crudActions.DELETE, crudActions.UPDATE]}
+        actions={[
+          crudActions.VIEW,
+          crudActions.CREATE,
+          crudActions.DELETE,
+          crudActions.UPDATE,
+        ]}
         searchBar=""
       />
     </Card>

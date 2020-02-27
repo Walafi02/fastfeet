@@ -6,20 +6,29 @@ export const Container = styled.div`
   z-index: 1;
   border-radius: 2px;
   width: min-content;
+  background: #fff;
 
-  span {
-    background: #fff;
+  > span {
+    color: #999999;
     display: flex;
     align-items: center;
     justify-content: start;
-    height: 30px;
+    margin: 15px auto;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding: 10px;
+    padding: 0 10px;
+    font-size: 20px;
     cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    svg {
+      margin-right: 5px;
+    }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.5);
+      opacity: 0.7;
     }
   }
 `;

@@ -4,7 +4,7 @@ import Item from './Item';
 
 import { Container } from './styles';
 
-export default function Table({ columns, data }) {
+export default function Table({ columns, data, actions }) {
   return (
     <Container>
       <thead>
@@ -17,7 +17,7 @@ export default function Table({ columns, data }) {
       </thead>
       <tbody>
         {data.map(item => (
-          <Item key={item.id} columns={columns} item={item} />
+          <Item key={item.id} columns={columns} item={item} actions={actions} />
         ))}
       </tbody>
     </Container>

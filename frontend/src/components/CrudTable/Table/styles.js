@@ -42,6 +42,13 @@ export const Container = styled.table`
               opacity: 0.7;
             }
           }
+
+          span {
+            background: #fff;
+            /* height: 60px; */
+            /* padding: 0 8px; */
+            position: relative;
+          }
         }
       }
     }
