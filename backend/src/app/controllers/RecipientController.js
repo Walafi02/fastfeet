@@ -1,10 +1,11 @@
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
 
 import { Recipient } from '../models';
 
 class RecipientController {
   async index(req, res) {
-    const { page = 1, paginate = 10 } = req.query;
+    const { name = '', page = 1, paginate = 10 } = req.query;
 
     const recipients = await Recipient.paginate({
       attributes: [
@@ -16,6 +17,11 @@ class RecipientController {
         'city',
         'state',
       ],
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
       page,
       paginate,
       // order: [['createdAt', 'DESC']],

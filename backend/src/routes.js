@@ -66,10 +66,10 @@ routes.get('/deliveryman/:id', DeliverymanController.show);
 routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
 
-routes.get('/delivery', DeliveryController.index);
-routes.post('/delivery', DeliveryController.store);
-routes.get('/delivery/:id', DeliveryController.show);
-routes.put('/delivery/:id', DeliveryController.update);
-routes.delete('/delivery/:id', DeliveryController.delete);
+routes.get('/deliveries', DeliveryController.index);
+routes.post('/deliveries', DeliveryController.store);
+routes.get('/deliveries/:id', DeliveryController.show);
+routes.put('/deliveries/:id', DeliveryController.update);
+routes.delete('/deliveries/:id', DeliveryController.delete);
 
 export default routes;

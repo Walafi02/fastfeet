@@ -1,10 +1,11 @@
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
 
 import { Deliveryman, File } from '../models';
 
 class DeliverymanController {
   async index(req, res) {
-    const { page = 1, paginate = 10 } = req.query;
+    const { name = '', page = 1, paginate = 10 } = req.query;
 
     const deliverymans = await Deliveryman.paginate({
       attributes: ['id', 'name', 'email'],
@@ -15,6 +16,11 @@ class DeliverymanController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
       page,
       paginate,
       // order: [['createdAt', 'DESC']],
@@ -54,13 +60,7 @@ class DeliverymanController {
     const { id } = req.params;
 
     const deliveryman = await Deliveryman.findByPk(id, {
-      include: [
-        {
-          model: File,
-          as: 'avatar',
-          attributes: ['id', 'path', 'url'],
-        },
-      ],
+      attributes: ['id', 'name', 'email', 'avatar_id'],
     });
 
     if (!deliveryman) return res.status(400).json({ error: 'ID not found' });
