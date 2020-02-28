@@ -14,10 +14,14 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   const [total, setTotal] = useState(null);
   const [pages, setPages] = useState(null);
 
-  const { urls, columns } = entities[entity];
+  const { urls, columns, labels } = entities[entity];
 
   function handleClickNew() {
     history.push(`/${entity}/new`);
+  }
+
+  function handleEdit(id) {
+    history.push(`/${entity}/edit/${id}`);
   }
 
   useEffect(() => {
@@ -39,9 +43,18 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   return (
     <div>
       {actions.includes(crudActions.CREATE) && (
-        <TableActions searchBar={searchBar} onclickNew={handleClickNew} />
+        <TableActions
+          searchBar={searchBar}
+          label={labels.find}
+          onclickNew={handleClickNew}
+        />
       )}
-      <Table columns={columns} data={docs} actions={actions} />
+      <Table
+        columns={columns}
+        data={docs}
+        actions={actions}
+        onEdit={handleEdit}
+      />
       <Pagination />
     </div>
   );

@@ -4,6 +4,7 @@ import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import { Form } from '@rocketseat/unform';
 import history from '~/services/history';
 import Button from '~/components/Button';
+import entities from '~/constants/entities';
 
 import { Container } from './styles';
 
@@ -13,7 +14,10 @@ export default function FormComponent({
   onSubmit,
   children,
   initialData,
+  edit,
 }) {
+  const { labels } = entities[entity];
+
   function handleGoBack() {
     history.push(`/${entity}`);
   }
@@ -21,7 +25,7 @@ export default function FormComponent({
   return (
     <Container>
       <h2 className="flex flex-between">
-        Cadastro de entregadores
+        {edit ? labels.textEdit : labels.textCreate}
         <div className="flex">
           <Button
             Icon={MdKeyboardArrowLeft}

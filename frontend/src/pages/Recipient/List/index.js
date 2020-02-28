@@ -9,8 +9,7 @@ export default function RecipientList() {
       <h2>Gerenciando destinatários</h2>
       <CrudTable
         entity="recipient"
-        actions={[crudActions.CREATE]}
-        // actions={[crudActions.CREATE, crudActions.DELETE, crudActions.UPDATE]}
+        actions={[crudActions.CREATE, crudActions.DELETE, crudActions.UPDATE]}
         searchBar=""
       />
     </Card>

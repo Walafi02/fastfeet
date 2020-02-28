@@ -4,11 +4,12 @@ import Button from '~/components/Button';
 import SearchBar from '~/components/SearchBar';
 import { Container } from './styles';
 
-export default function TableActions({ onclickNew }) {
+export default function TableActions({ onclickNew, label }) {
   return (
     <Container className="flex flex-between">
       <SearchBar
         Icon={MdSearch}
+        placeholder={label}
         // value={name}
         // onChange={e => setName(e.target.value)}
       />

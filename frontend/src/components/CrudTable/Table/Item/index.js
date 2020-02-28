@@ -10,7 +10,7 @@ import renders from '../renders';
 import DropdownMenu from '~/components/DropdownMenu';
 import crudActions from '~/constants/crudActions';
 
-export default function Item({ columns, item, actions }) {
+export default function Item({ columns, item, actions, onEdit }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ export default function Item({ columns, item, actions }) {
             )}
 
             {actions.includes(crudActions.UPDATE) && (
-              <span>
+              <span onClick={() => onEdit(item.id)}>
                 <MdModeEdit size={23} color="#4D85EE" />
                 Editar
               </span>

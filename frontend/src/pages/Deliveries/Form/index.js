@@ -29,6 +29,7 @@ export default function DeliveryForm({ match }) {
       onSubmit={handleSubmit}
       schema={schema}
       initialData={{ name: 'walafi', email: 'walafif@yahoo.com' }}
+      edit={id}
     >
       <Field>
         <AvaterInput name="avatar" file={file} setFile={setFile} />

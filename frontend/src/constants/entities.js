@@ -13,6 +13,11 @@ const entities = {
       { field: 'recipient.state', label: 'Estado', type: 'text' },
       { field: 'status', label: 'Status', type: 'status' },
     ],
+    labels: {
+      find: 'Busca por destinatários',
+      textCreate: 'Cadastro de encomendas',
+      textEdit: 'Edição de encomendas',
+    },
   },
   deliveryman: {
     urls: {
@@ -25,6 +30,11 @@ const entities = {
       { field: 'name', label: 'Nome', type: 'text' },
       { field: 'email', label: 'Email', type: 'fulltext' },
     ],
+    labels: {
+      find: 'Busca por entregadores',
+      textCreate: 'Cadastro de entregador',
+      textEdit: 'Edição de entregador',
+    },
   },
   recipient: {
     urls: {
@@ -36,6 +46,11 @@ const entities = {
       { field: 'name', label: 'Nome', type: 'text' },
       { field: 'address', label: 'Endereço', type: 'fulltext' },
     ],
+    labels: {
+      find: 'Busca por destinatários',
+      textCreate: 'Cadastro de destinatário',
+      textEdit: 'Edição de destinatário',
+    },
   },
   problems: {
     urls: {

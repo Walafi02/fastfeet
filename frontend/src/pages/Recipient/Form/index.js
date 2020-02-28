@@ -1,7 +1,42 @@
 import React from 'react';
+import * as Yup from 'yup';
+import { Input } from '@rocketseat/unform';
+import PropTypes from 'prop-types';
 
-// import { Container } from './styles';
+import Form from '~/components/Form';
+import Field from '~/components/Field';
 
-export default function RecipientForm() {
-  return <div>RecipientForm</div>;
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatorio'),
+});
+
+export default function RecipientForm({ match }) {
+  const { id } = match.params;
+
+  function handleSubmit(data) {
+    console.log(data);
+  }
+
+  return (
+    <Form
+      entity="recipient"
+      onSubmit={handleSubmit}
+      schema={schema}
+      initialData={{ name: 'walafi', email: 'walafif@yahoo.com' }}
+      edit={id}
+    >
+      <Field>
+        <Input label="Nome" name="name" />
+      </Field>
+      >
+    </Form>
+  );
 }
+
+RecipientForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};
