@@ -1,8 +1,8 @@
 const entities = {
   deliveries: {
     urls: {
-      get: '/delivery',
-      show: '/delivery/:id',
+      get: '/deliveries',
+      show: '/deliveries/:id',
     },
     columns: [
       { field: 'id', label: 'ID', type: 'text' },

@@ -2,43 +2,73 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { Input } from '@rocketseat/unform';
+import api from '~/services/api';
 
-import AvaterInput from '~/components/AvaterInput';
 import Form from '~/components/Form';
 import Field from '~/components/Field';
+import ReactSelect from '~/components/ReactSelect';
 
 const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatorio'),
-  email: Yup.string()
-    .email('E-mail inválido')
-    .required('Campo obrigatório'),
+  avatar_id: Yup.number(),
 });
 
 export default function DeliveryForm({ match }) {
   const { id } = match.params;
-  const [file, setFile] = useState({ id: null, url: null });
 
-  function handleSubmit(data) {
-    console.log(data);
-    console.log(file);
+  // const [plan, setPlan] = useState('');
+
+  async function getRecipient(recipient_id, setName) {
+    const { data } = await api.get(`/recipient/${recipient_id}`);
+    setName(data.title);
+  }
+
+  async function loadRecipient(inputValue) {
+    const { data } = await api.get('/recipient', {
+      params: {
+        name: inputValue,
+      },
+    });
+
+    return data.docs;
+  }
+
+  async function getDeliveryman(deliveryman_id, setName) {
+    const { data } = await api.get(`/deliveryman/${deliveryman_id}`);
+    setName(data.title);
+  }
+
+  async function loadDeliveryman(inputValue) {
+    const { data } = await api.get('/deliveryman', {
+      params: {
+        name: inputValue,
+      },
+    });
+
+    return data.docs;
   }
 
   return (
-    <Form
-      entity="deliveries"
-      onSubmit={handleSubmit}
-      schema={schema}
-      initialData={{ name: 'walafi', email: 'walafif@yahoo.com' }}
-      edit={id}
-    >
+    <Form entity="deliveries" schema={schema} id={id}>
+      <div className="flex">
+        <Field>
+          <ReactSelect
+            label="Destinatário"
+            name="recipient_id"
+            loadInputValue={getRecipient}
+            loadOptions={loadRecipient}
+          />
+        </Field>
+        <Field>
+          <ReactSelect
+            label="Entregador"
+            name="deliveryman_id"
+            loadInputValue={getDeliveryman}
+            loadOptions={loadDeliveryman}
+          />
+        </Field>
+      </div>
       <Field>
-        <AvaterInput name="avatar" file={file} setFile={setFile} />
-      </Field>
-      <Field>
-        <Input label="Nome" name="name" />
-      </Field>
-      <Field>
-        <Input label="e-mail" name="email" />
+        <Input label="Nome do Produto" name="product" />
       </Field>
     </Form>
   );
