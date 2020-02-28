@@ -2,23 +2,33 @@ import React, { useRef, useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import PropTypes from 'prop-types';
 import { useField } from '@rocketseat/unform';
+import api from '~/services/api';
 
-export default function AsyncSelectInput({
-  label,
-  name,
-  loadInputValue,
-  loadOptions,
-  // setPlan,
-}) {
+export default function AsyncSelectInput({ label, name, entity }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [inputName, setInputName] = useState('');
   const [selected, setSelected] = useState(null);
 
+  async function loadInputValue(id) {
+    const { data } = await api.get(`/${entity}/${id}`);
+    setInputName(data.name);
+  }
+
+  async function loadOptions(inputValue) {
+    const { data } = await api.get(`/${entity}`, {
+      params: {
+        name: inputValue,
+      },
+    });
+
+    return data.docs;
+  }
+
   useEffect(() => {
     if (defaultValue !== null) {
       setSelected(defaultValue);
-      loadInputValue(defaultValue, setInputName);
+      loadInputValue(defaultValue);
     }
   }, [defaultValue]);  // eslint-disable-line
 
@@ -41,10 +51,7 @@ export default function AsyncSelectInput({
         selected={selected}
         getOptionValue={option => option.id}
         getOptionLabel={option => option.name || option.title}
-        onChange={e => {
-          setSelected(e.id);
-          // setPlan && setPlan(e);
-        }}
+        onChange={e => setSelected(e.id)}
         defaultOptions
         onInputChange={newValue => setInputName(newValue)}
         inputValue={inputName}
@@ -59,11 +66,5 @@ export default function AsyncSelectInput({
 AsyncSelectInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  loadInputValue: PropTypes.func.isRequired,
-  loadOptions: PropTypes.func.isRequired,
-  // setPlan: PropTypes.func,
+  entity: PropTypes.string.isRequired,
 };
-
-// AsyncSelectInput.defaultProps = {
-//   setPlan: null,
-// };
