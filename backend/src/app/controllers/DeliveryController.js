@@ -43,6 +43,7 @@ class DeliveryController {
       ],
       page,
       paginate,
+      order: [['updated_at', 'DESC']],
     });
 
     return res.json(deliverys);
@@ -85,24 +86,7 @@ class DeliveryController {
     const { id } = req.params;
 
     const deliverys = await Delivery.findByPk(id, {
-      attributes: ['id', 'product'],
-      include: [
-        {
-          model: Recipient,
-          as: 'recipient',
-          attributes: ['id', 'name'],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['id', 'name'],
-        },
-        {
-          model: File,
-          as: 'signature',
-          attributes: ['id', 'path', 'url'],
-        },
-      ],
+      attributes: ['id', 'product', 'recipient_id', 'deliveryman_id'],
     });
 
     if (!deliverys) return res.status(400).json({ error: 'ID not found' });

@@ -24,7 +24,7 @@ class RecipientController {
       },
       page,
       paginate,
-      // order: [['createdAt', 'DESC']],
+      order: [['updated_at', 'DESC']],
     });
 
     return res.json(recipients);
@@ -34,11 +34,11 @@ class RecipientController {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       street: Yup.string().required(),
-      number: Yup.number().required(),
-      complement: Yup.string().required(),
+      number: Yup.string(),
+      complement: Yup.string(),
       state: Yup.string().required(),
       city: Yup.string().required(),
-      cep: Yup.number().required(),
+      cep: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body)))
@@ -72,11 +72,11 @@ class RecipientController {
     const schema = Yup.object().shape({
       name: Yup.string(),
       street: Yup.string(),
-      number: Yup.number(),
+      number: Yup.string(),
       complement: Yup.string(),
       state: Yup.string(),
       city: Yup.string(),
-      cep: Yup.number(),
+      cep: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body)))

@@ -32,6 +32,7 @@ class DeliverymanDeliveriesController {
       ],
       page,
       paginate,
+      order: [['updated_at', 'DESC']],
     });
 
     return res.json(deliverys);

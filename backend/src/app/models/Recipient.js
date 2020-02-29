@@ -7,11 +7,11 @@ class Recipient extends Model {
       {
         name: Sequelize.STRING,
         street: Sequelize.STRING,
-        number: Sequelize.INTEGER,
+        number: Sequelize.STRING,
         complement: Sequelize.STRING,
         state: Sequelize.STRING,
         city: Sequelize.STRING,
-        cep: Sequelize.INTEGER,
+        cep: Sequelize.STRING,
         address: {
           type: Sequelize.VIRTUAL,
           get() {
@@ -28,10 +28,6 @@ class Recipient extends Model {
 
     return this;
   }
-
-  // static associate(models) {
-  //   this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
-  // }
 }
 
 SequelizePaginate.paginate(Recipient);

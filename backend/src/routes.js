@@ -53,6 +53,7 @@ routes.use(authMiddleware);
 routes.get('/delivery/problems', DeliveryProblemsController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/files/:id', FileController.show);
 
 routes.get('/recipient', RecipientController.index);
 routes.get('/recipient/:id', RecipientController.show);
