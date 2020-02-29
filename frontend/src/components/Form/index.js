@@ -35,6 +35,7 @@ export default function FormComponent({ entity, id, schema, children }) {
   async function getData() {
     try {
       const { data } = await api.get(`/${entity}/${id}`);
+      console.log(data);
       setInitialData(data);
     } catch (error) {
       toast.error(
@@ -84,7 +85,7 @@ export default function FormComponent({ entity, id, schema, children }) {
 }
 
 Form.propTypes = {
-  entity: PropTypes.string.isRequired,
+  entity: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
     .isRequired,
   schema: PropTypes.object,

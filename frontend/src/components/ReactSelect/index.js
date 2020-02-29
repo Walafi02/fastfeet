@@ -26,7 +26,7 @@ export default function AsyncSelectInput({ label, name, entity }) {
   }
 
   useEffect(() => {
-    if (defaultValue !== null) {
+    if (defaultValue) {
       setSelected(defaultValue);
       loadInputValue(defaultValue);
     }
@@ -47,6 +47,7 @@ export default function AsyncSelectInput({ label, name, entity }) {
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
       <AsyncSelect
+        id={fieldName}
         name={fieldName}
         selected={selected}
         getOptionValue={option => option.id}

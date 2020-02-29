@@ -8,7 +8,9 @@ import Field from '~/components/Field';
 import ReactSelect from '~/components/ReactSelect';
 
 const schema = Yup.object().shape({
-  avatar_id: Yup.number(),
+  recipient_id: Yup.number().required(),
+  deliveryman_id: Yup.number().required(),
+  product: Yup.string().required(),
 });
 
 export default function DeliveryForm({ match }) {

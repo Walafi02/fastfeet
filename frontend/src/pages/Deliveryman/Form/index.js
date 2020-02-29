@@ -25,10 +25,15 @@ export default function DeliverymanForm({ match }) {
           <AvaterInput name="avatar_id" />
         </Field>
         <Field>
-          <Input label="Nome" name="name" placeholder="José Antônio" />
+          <Input label="Nome" name="name" placeholder="José Antônio" required />
         </Field>
         <Field>
-          <Input label="e-mail" name="email" placeholder="exemplo@gmail.com" />
+          <Input
+            label="e-mail"
+            name="email"
+            placeholder="exemplo@gmail.com"
+            required
+          />
         </Field>
       </Field>
     </Form>

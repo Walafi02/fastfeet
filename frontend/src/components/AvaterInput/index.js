@@ -8,9 +8,20 @@ import { Container } from './styles';
 
 export default function AvatarInput({ name }) {
   const { fieldName, registerField, defaultValue } = useField(name);
-  const [file, setFile] = useState(defaultValue && defaultValue.id);
-  const [preview, setPreview] = useState(defaultValue && defaultValue.url);
+  const [file, setFile] = useState(defaultValue);
+  const [preview, setPreview] = useState(null);
   const ref = useRef();
+
+  async function getFile(id) {
+    const { data } = await api.get(`/files/${id}`);
+    setPreview(data.url);
+  }
+
+  useEffect(() => {
+    if (defaultValue) {
+      getFile(defaultValue);
+    }
+  }, [defaultValue]);
 
   useEffect(() => {
     if (ref.current) {
