@@ -1,5 +1,7 @@
 const faker = require('faker');
 
+faker.locale = 'pt_BR';
+
 module.exports = {
   up: queryInterface => {
     const deliverymans = [];

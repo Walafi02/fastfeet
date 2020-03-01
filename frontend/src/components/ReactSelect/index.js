@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useField } from '@rocketseat/unform';
 import api from '~/services/api';
 
-export default function AsyncSelectInput({ label, name, entity }) {
+export default function AsyncSelectInput({ label, name, entity, ...rest }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [inputName, setInputName] = useState('');
@@ -58,6 +58,7 @@ export default function AsyncSelectInput({ label, name, entity }) {
         inputValue={inputName}
         loadOptions={loadOptions}
         ref={ref}
+        {...rest}
       />
       {error && <span>{error}</span>}
     </>

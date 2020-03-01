@@ -25,15 +25,30 @@ export default function RecipientForm({ match }) {
   return (
     <Form entity="recipient" schema={schema} id={id}>
       <Field>
-        <Input label="Nome" name="name" required />
+        <Input
+          label="Nome"
+          name="name"
+          required
+          placeholder="Ludwig van Beethoven"
+        />
       </Field>
       <div className="flex">
         <Field>
-          <Input label="Rua" name="street" required />
+          <Input
+            label="Rua"
+            name="street"
+            required
+            placeholder="Rua Beethoven"
+          />
         </Field>
         <div className="flex">
           <Field>
-            <Input type="number" label="Número" name="number" />
+            <Input
+              type="number"
+              label="Número"
+              name="number"
+              placeholder="1799"
+            />
           </Field>
           <Field>
             <Input label="Complemento" name="complement" />
@@ -42,13 +57,19 @@ export default function RecipientForm({ match }) {
       </div>
       <div className="flex">
         <Field>
-          <Input label="Cidade" name="city" required />
+          <Input label="Cidade" name="city" required placeholder="Diadema" />
         </Field>
         <Field>
-          <Input label="Estado" name="state" required />
+          <Input label="Estado" name="state" required placeholder="São Paulo" />
         </Field>
         <Field>
-          <InputMask label="CEP" name="cep" mask="99999-999" required />
+          <InputMask
+            label="CEP"
+            name="cep"
+            mask="99999-999"
+            required
+            placeholder="09960-580"
+          />
         </Field>
       </div>
     </Form>

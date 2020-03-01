@@ -7451,6 +7451,11 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
+paging-algorithm@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/paging-algorithm/-/paging-algorithm-1.0.1.tgz#18abe482a6a202bfaab4b023a407c8cc2072cb8a"
+  integrity sha512-hYLG10yTytEcE7gaeLw5z1Rert4MHYiQNxzwLt59LHb3bKRBShDX/0BqX4tQoAK11tQzoqSFkUelc6ptagfy5w==
+
 pako@~1.0.5:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
@@ -8667,6 +8672,11 @@ react-app-rewired@^2.1.5:
   dependencies:
     semver "^5.6.0"
 
+react-confirm-alert@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.5.1.tgz#da76bd776a879588fa3f5fa6c7d1f56cbbe25a0e"
+  integrity sha512-awS/18gHnLh3di/KJb8jOJQsFo+ucHICBnnv06osTpbmXeFW0NI1qi5hLoMnK9U70KWzWZcVqq7nzDol9YWE3A==
+
 react-dev-utils@^10.2.0:
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.0.tgz#b11cc48aa2be2502fb3c27a50d1dfa95cfa9dfe0"
@@ -8743,6 +8753,13 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-paginating@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-paginating/-/react-paginating-1.4.0.tgz#f19c4871d60428a7a2a0d49981da0e1df148e129"
+  integrity sha512-fVUQil9O8R5t7ggPvMqW6lz5/0TLbPvrfJ+54NykeURqmxAk3TBbIOL9SS7KRmpggDkym+6BNnSMdQ45Fh2wvg==
+  dependencies:
+    paging-algorithm "^1.0.1"
 
 react-redux@^7.2.0:
   version "7.2.0"

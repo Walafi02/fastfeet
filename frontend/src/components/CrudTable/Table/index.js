@@ -4,7 +4,7 @@ import Item from './Item';
 
 import { Container } from './styles';
 
-export default function Table({ columns, data, actions, onEdit }) {
+export default function Table({ columns, data, actions, onEdit, onDelete }) {
   return (
     <Container>
       <thead>
@@ -23,6 +23,7 @@ export default function Table({ columns, data, actions, onEdit }) {
             item={item}
             actions={actions}
             onEdit={onEdit}
+            onDelete={onDelete}
           />
         ))}
       </tbody>

@@ -6,12 +6,23 @@ import {
   MdModeEdit,
   MdDeleteForever,
 } from 'react-icons/md';
+import { confirmAlert } from 'react-confirm-alert';
+
 import renders from '../renders';
 import DropdownMenu from '~/components/DropdownMenu';
+import DeleteConfirm from '~/components/DeleteConfirm';
 import crudActions from '~/constants/crudActions';
 
-export default function Item({ columns, item, actions, onEdit }) {
+export default function Item({ columns, item, actions, onEdit, onDelete }) {
   const [open, setOpen] = useState(false);
+
+  function handleDelete(id) {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return <DeleteConfirm id={id} onClose={onClose} onDelete={onDelete} />;
+      },
+    });
+  }
 
   return (
     <tr>
@@ -42,7 +53,7 @@ export default function Item({ columns, item, actions, onEdit }) {
             )}
 
             {actions.includes(crudActions.DELETE) && (
-              <span>
+              <span onClick={() => handleDelete(item.id)}>
                 <MdDeleteForever size={23} color="#DE3B3B" />
                 Excluir
               </span>

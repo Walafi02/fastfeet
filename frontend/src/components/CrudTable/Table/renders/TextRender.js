@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 import _get from 'lodash/get';
 
-// import { Container } from './styles';
-
 const TextRender = ({ data, column }) => {
   const text = _get(data, column.field);
 

@@ -8,8 +8,12 @@ import Field from '~/components/Field';
 import ReactSelect from '~/components/ReactSelect';
 
 const schema = Yup.object().shape({
-  recipient_id: Yup.number().required(),
-  deliveryman_id: Yup.number().required(),
+  recipient_id: Yup.number()
+    .required('Campo é obrigatorio')
+    .typeError('Selecione o campo'),
+  deliveryman_id: Yup.number()
+    .required()
+    .typeError('Selecione o campo'),
   product: Yup.string().required(),
 });
 
@@ -24,6 +28,8 @@ export default function DeliveryForm({ match }) {
             label="Destinatário"
             name="recipient_id"
             entity="recipient"
+            placeholder="Ludwig van Beethoven"
+            required
           />
         </Field>
         <Field>
@@ -31,11 +37,18 @@ export default function DeliveryForm({ match }) {
             label="Entregador"
             name="deliveryman_id"
             entity="deliveryman"
+            placeholder="John Doe"
+            required
           />
         </Field>
       </div>
       <Field>
-        <Input label="Nome do Produto" name="product" />
+        <Input
+          label="Nome do Produto"
+          name="product"
+          required
+          placeholder="Yamaha SX7"
+        />
       </Field>
     </Form>
   );

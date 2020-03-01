@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
 import Queue from '../../lib/Queue';
 import { DeliveryAlert } from '../../jobs';
@@ -6,7 +7,7 @@ import { Delivery, Recipient, Deliveryman, File } from '../models';
 
 class DeliveryController {
   async index(req, res) {
-    const { page = 1, paginate = 10 } = req.query;
+    const { name = '', page = 1, paginate = 10 } = req.query;
 
     const deliverys = await Delivery.paginate({
       attributes: [
@@ -17,6 +18,11 @@ class DeliveryController {
         'start_date',
         'end_date',
       ],
+      where: {
+        product: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
       include: [
         {
           model: Recipient,

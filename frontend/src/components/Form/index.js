@@ -35,7 +35,6 @@ export default function FormComponent({ entity, id, schema, children }) {
   async function getData() {
     try {
       const { data } = await api.get(`/${entity}/${id}`);
-      console.log(data);
       setInitialData(data);
     } catch (error) {
       toast.error(
