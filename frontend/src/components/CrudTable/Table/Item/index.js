@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -13,7 +15,14 @@ import DropdownMenu from '~/components/DropdownMenu';
 import DeleteConfirm from '~/components/DeleteConfirm';
 import crudActions from '~/constants/crudActions';
 
-export default function Item({ columns, item, actions, onEdit, onDelete }) {
+export default function Item({
+  columns,
+  item,
+  actions,
+  onEdit,
+  onDelete,
+  onView,
+}) {
   const [open, setOpen] = useState(false);
 
   function handleDelete(id) {
@@ -39,7 +48,12 @@ export default function Item({ columns, item, actions, onEdit, onDelete }) {
 
           <DropdownMenu open={open} setOpen={setOpen} marginLeft="-145%">
             {actions.includes(crudActions.VIEW) && (
-              <span>
+              <span
+                onClick={() => {
+                  onView(item);
+                  setOpen(false);
+                }}
+              >
                 <MdVisibility size={23} color="#8E5BE8" />
                 Visualizar
               </span>

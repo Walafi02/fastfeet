@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import { format, parseISO } from 'date-fns';
+
 import history from '~/services/history';
 import api from '~/services/api';
 import entities from '~/constants/entities';
@@ -10,6 +12,8 @@ import TableActions from './TableActions';
 import Table from './Table';
 import Pagination from './Pagination';
 
+import ReactModal from '~/components/ReactModal';
+
 export default function CRUDTable({ entity, actions, searchBar }) {
   const [docs, setDocs] = useState([]);
 
@@ -17,6 +21,8 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   const [currentPage, setCurrentPage] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [openView, setOpenView] = useState(false);
+  const [itemToView, setItemToView] = useState({});
 
   const { urls, columns, labels } = entities[entity];
 
@@ -61,6 +67,12 @@ export default function CRUDTable({ entity, actions, searchBar }) {
     }
   }
 
+  function handleView(item) {
+    setOpenView(value => !value);
+    setItemToView(item);
+    console.log(item);
+  }
+
   useEffect(() => {
     load();
   }, [name]); // eslint-disable-line
@@ -82,6 +94,7 @@ export default function CRUDTable({ entity, actions, searchBar }) {
         actions={actions}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onView={handleView}
       />
       <Pagination
         cPage={currentPage}
@@ -89,6 +102,52 @@ export default function CRUDTable({ entity, actions, searchBar }) {
         handlePageChange={load}
         tPages={totalPages}
       />
+
+      {actions.includes(crudActions.VIEW) && (
+        <ReactModal open={openView} setOpen={setOpenView}>
+          <div>
+            <div className="flex flex-column">
+              <strong>Informações da encomenda</strong>
+              <span>
+                Rua {itemToView.recipient && itemToView.recipient.street} - 123
+              </span>
+              <span>
+                {itemToView.recipient && itemToView.recipient.city} -{' '}
+                {itemToView.recipient && itemToView.recipient.state}
+              </span>
+              <span>{itemToView.recipient && itemToView.recipient.cep}</span>
+            </div>
+            {(itemToView.start_date || itemToView.end_date) && (
+              <>
+                <br />
+                <div className="flex flex-column">
+                  <strong>Datas</strong>
+                  {itemToView.start_date && (
+                    <div>
+                      <strong>Retirada: </strong>
+                      {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
+                    </div>
+                  )}
+                  {itemToView.start_date && (
+                    <div>
+                      <strong>Entrega: </strong>
+                      {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+            {itemToView.signature && (
+              <>
+                <br />
+                <div>
+                  <strong>Assinatura do destinatário</strong>
+                </div>
+              </>
+            )}
+          </div>
+        </ReactModal>
+      )}
     </div>
   );
 }
