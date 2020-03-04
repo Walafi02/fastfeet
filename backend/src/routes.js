@@ -45,8 +45,6 @@ routes.post('/session', SessionController.store);
 
 routes.use(authMiddleware);
 
-routes.get('/delivery/problems', DeliveryProblemsController.index);
-
 routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/files/:id', FileController.show);
 
@@ -68,6 +66,7 @@ routes.get('/deliveries/:id', DeliveryController.show);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
 
+routes.get('/problems', DeliveryProblemsController.index);
 routes.put(
   '/delivery/:problems_id/cancel-delivery',
   DeliveryProblemsController.update

@@ -27,14 +27,14 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   const [openViewProblem, setOpenViewProblem] = useState(false);
   const [itemToViewProblem, setItemToViewProblem] = useState({});
 
-  const { urls, columns, labels } = entities[entity];
+  const { columns, labels } = entities[entity];
 
   async function load(page = 1) {
     setLoading(true);
     setCurrentPage(page);
 
     try {
-      const { data } = await api.get(urls.get, {
+      const { data } = await api.get(`/${entity}`, {
         params: {
           name,
           page,
@@ -92,10 +92,6 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   useEffect(() => {
     load();
   }, [name]); // eslint-disable-line
-
-  useEffect(() => {
-    handleCancel(1);
-  }, []); // eslint-disable-line
 
   return (
     <div>
