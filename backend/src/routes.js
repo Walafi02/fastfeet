@@ -43,11 +43,6 @@ routes.post('/session', SessionController.store);
 
 // routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
 
-// routes.delete(
-//   '/recipient/:recipient_id/delivery/:problems_id/cancel-delivery',
-//   DeliveryProblemsController.delete
-// );
-
 routes.use(authMiddleware);
 
 routes.get('/delivery/problems', DeliveryProblemsController.index);
@@ -72,5 +67,10 @@ routes.post('/deliveries', DeliveryController.store);
 routes.get('/deliveries/:id', DeliveryController.show);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
+
+routes.put(
+  '/delivery/:problems_id/cancel-delivery',
+  DeliveryProblemsController.update
+);
 
 export default routes;

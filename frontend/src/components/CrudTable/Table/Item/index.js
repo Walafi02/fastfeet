@@ -22,6 +22,8 @@ export default function Item({
   onEdit,
   onDelete,
   onView,
+  onCancel,
+  onViewProblem,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -70,6 +72,25 @@ export default function Item({
               <span onClick={() => handleDelete(item.id)}>
                 <MdDeleteForever size={23} color="#DE3B3B" />
                 Excluir
+              </span>
+            )}
+
+            {actions.includes(crudActions.VIEW_PROBLEM) && (
+              <span
+                onClick={() => {
+                  onViewProblem(item);
+                  setOpen(false);
+                }}
+              >
+                <MdModeEdit size={23} color="#4D85EE" />
+                Visualizar
+              </span>
+            )}
+
+            {actions.includes(crudActions.CANCEL) && (
+              <span onClick={() => onCancel(item.id)}>
+                <MdDeleteForever size={23} color="#DE3B3B" />
+                Cancelar
               </span>
             )}
           </DropdownMenu>

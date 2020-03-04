@@ -11,6 +11,8 @@ export default function Table({
   onEdit,
   onDelete,
   onView,
+  onCancel,
+  onViewProblem,
 }) {
   return (
     <Container>
@@ -32,6 +34,8 @@ export default function Table({
             onEdit={onEdit}
             onDelete={onDelete}
             onView={onView}
+            onCancel={onCancel}
+            onViewProblem={onViewProblem}
           />
         ))}
       </tbody>

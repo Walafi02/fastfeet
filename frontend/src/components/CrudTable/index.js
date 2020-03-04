@@ -21,8 +21,11 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   const [currentPage, setCurrentPage] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const [openView, setOpenView] = useState(false);
   const [itemToView, setItemToView] = useState({});
+  const [openViewProblem, setOpenViewProblem] = useState(false);
+  const [itemToViewProblem, setItemToViewProblem] = useState({});
 
   const { urls, columns, labels } = entities[entity];
 
@@ -70,12 +73,29 @@ export default function CRUDTable({ entity, actions, searchBar }) {
   function handleView(item) {
     setOpenView(value => !value);
     setItemToView(item);
-    console.log(item);
+  }
+
+  async function handleCancel(id) {
+    try {
+      await api.put(`/delivery/${id}/cancel-delivery`);
+      toast.success('Cancelado!');
+    } catch (error) {
+      toast.error(error.response.data.error || 'Error Interno.');
+    }
+  }
+
+  function handleViewProblem(item) {
+    setOpenViewProblem(value => !value);
+    setItemToViewProblem(item);
   }
 
   useEffect(() => {
     load();
   }, [name]); // eslint-disable-line
+
+  useEffect(() => {
+    handleCancel(1);
+  }, []); // eslint-disable-line
 
   return (
     <div>
@@ -95,6 +115,8 @@ export default function CRUDTable({ entity, actions, searchBar }) {
         onEdit={handleEdit}
         onDelete={handleDelete}
         onView={handleView}
+        onCancel={handleCancel}
+        onViewProblem={handleViewProblem}
       />
       <Pagination
         cPage={currentPage}
@@ -117,22 +139,33 @@ export default function CRUDTable({ entity, actions, searchBar }) {
               </span>
               <span>{itemToView.recipient && itemToView.recipient.cep}</span>
             </div>
-            {(itemToView.start_date || itemToView.end_date) && (
+            {(itemToView.start_date ||
+              itemToView.end_date ||
+              itemToView.canceled_at) && (
               <>
                 <br />
                 <div className="flex flex-column">
                   <strong>Datas</strong>
-                  {itemToView.start_date && (
+
+                  {itemToView.canceled_at ? (
                     <div>
-                      <strong>Retirada: </strong>
-                      {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
+                      <strong>Cancelado em: </strong>
+                      {format(parseISO(itemToView.canceled_at), 'dd/MM/yyyy')}
                     </div>
-                  )}
-                  {itemToView.start_date && (
-                    <div>
-                      <strong>Entrega: </strong>
-                      {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
-                    </div>
+                  ) : (
+                    <>
+                      itemToView.start_date && (
+                      <div>
+                        <strong>Retirada: </strong>
+                        {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
+                      </div>
+                      ) itemToView.start_date && (
+                      <div>
+                        <strong>Entrega: </strong>
+                        {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
+                      </div>
+                      )
+                    </>
                   )}
                 </div>
               </>
@@ -148,6 +181,17 @@ export default function CRUDTable({ entity, actions, searchBar }) {
           </div>
         </ReactModal>
       )}
+
+      {actions.includes(crudActions.VIEW_PROBLEM) && (
+        <ReactModal open={openViewProblem} setOpen={setOpenViewProblem}>
+          <div>
+            <p>
+              <strong>VISUALIZAR PROBLEMA</strong>
+            </p>
+            <p>{itemToViewProblem.description}</p>
+          </div>
+        </ReactModal>
+      )}
     </div>
   );
 }
@@ -155,5 +199,5 @@ export default function CRUDTable({ entity, actions, searchBar }) {
 CRUDTable.propTypes = {
   entity: PropTypes.string.isRequired,
   actions: PropTypes.arrayOf(PropTypes.string),
-  searchBar: PropTypes.string.isRequired,
+  searchBar: PropTypes.string,
 };

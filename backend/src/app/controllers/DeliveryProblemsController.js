@@ -66,46 +66,34 @@ class DeliveryProblemsController {
     return res.json(deliveryProblems);
   }
 
-  async delete(req, res) {
-    const { recipient_id, problems_id } = req.params;
-
-    const recipient = await Recipient.findByPk(recipient_id);
-
-    if (!recipient)
-      return res.status(400).json({ error: 'Recipient not found' });
+  async update(req, res) {
+    const { problems_id } = req.params;
 
     const deliveryProblems = await DeliveryProblems.findOne({
       where: {
         id: problems_id,
       },
-      include: [
-        {
-          model: Delivery,
-          as: 'delivery',
-          required: true,
-          where: { recipient_id },
-        },
-      ],
     });
 
     if (!deliveryProblems)
       return res.status(400).json({ error: 'Delivery Problems not found' });
 
-    const { delivery } = deliveryProblems;
+    const { delivery_id } = deliveryProblems;
 
-    const deliveryman = await Deliveryman.findByPk(delivery.deliveryman_id);
+    const delivery = await Delivery.findByPk(delivery_id);
 
-    if (!deliveryman)
-      return res.status(400).json({ error: 'Deliveryman not found' });
+    if (!delivery) return res.status(400).json({ error: 'Delivery not found' });
 
-    deliveryProblems.destroy();
+    const deliveryUpdated = await delivery.update(
+      {
+        canceled_at: new Date(),
+      },
+      {
+        new: true,
+      }
+    );
 
-    await Queue.add(DeliveryAlertCanceled.key, {
-      product: delivery.product,
-      deliveryman,
-    });
-
-    return res.json();
+    return res.json(deliveryUpdated);
   }
 }
 
