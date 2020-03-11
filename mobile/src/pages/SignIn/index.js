@@ -1,17 +1,40 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import {Image, StatusBar} from 'react-native';
+import * as Yup from 'yup';
 
+import {Form} from '@unform/mobile';
 import {Input, Button} from '~/components';
-import {Container, Form} from './styles';
+import {Container, FormContainer} from './styles';
 
 import logo from '~/assets/logo.png';
 
-export default function SignIn() {
-  const [id, setId] = useState();
+const schema = Yup.object().shape({
+  id: Yup.number().required(),
+});
 
-  // function handleSubmit() {
-  //   console.log('handleSubmit');
-  // }
+export default function SignIn() {
+  const formRef = useRef(null);
+
+  async function handleSubmit(data) {
+    try {
+      formRef.current.setErrors({});
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      const {id} = data;
+      console.tron.log(id);
+    } catch (err) {
+      const validationErrors = {};
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+        formRef.current.setErrors(validationErrors);
+      }
+    }
+  }
 
   const loading = false;
 
@@ -21,22 +44,23 @@ export default function SignIn() {
       <Container>
         <Image source={logo} />
 
-        <Form>
-          <Input
-            autoCapitalize="none"
-            keyboardType="numeric"
-            autoCorrect={false}
-            placeholder="Informe seu ID de cadastro"
-            // returnKeyType="send"
-            // onSubmitEditing={handleSubmit}
-            value={id}
-            onChangeText={setId}
-          />
-
-          {/* <SubmitButton loading={loading} onPress={handleSubmit}> */}
-          <Button loading={loading} onPress={() => {}}>
-            Entrar no sistema
-          </Button>
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <FormContainer>
+            <Input
+              name="id"
+              autoCapitalize="none"
+              keyboardType="numeric"
+              autoCorrect={false}
+              placeholder="Informe seu ID de cadastro"
+              returnKeyType="send"
+              onSubmitEditing={() => formRef.current.submitForm()}
+            />
+            <Button
+              loading={loading}
+              onPress={() => formRef.current.submitForm()}>
+              Entrar no sistema
+            </Button>
+          </FormContainer>
         </Form>
       </Container>
     </>
