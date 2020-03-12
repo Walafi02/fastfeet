@@ -1,10 +1,13 @@
 import React, {useRef} from 'react';
 import {Image, StatusBar} from 'react-native';
 import * as Yup from 'yup';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Form} from '@unform/mobile';
 import {Input, Button} from '~/components';
 import {Container, FormContainer} from './styles';
+
+import {signInRequest} from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo.png';
 
@@ -14,6 +17,9 @@ const schema = Yup.object().shape({
 
 export default function SignIn() {
   const formRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const loading = useSelector(state => state.auth.loading);
 
   async function handleSubmit(data) {
     try {
@@ -24,7 +30,7 @@ export default function SignIn() {
       });
 
       const {id} = data;
-      console.tron.log(id);
+      dispatch(signInRequest(id));
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -35,8 +41,6 @@ export default function SignIn() {
       }
     }
   }
-
-  const loading = false;
 
   return (
     <>
