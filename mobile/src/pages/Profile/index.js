@@ -1,21 +1,56 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native';
+import React, {useMemo} from 'react';
+import {Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+
+import {format, parseISO} from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import {singOut} from '~/store/modules/auth/actions';
 
+import {
+  Container,
+  Info,
+  Label,
+  Text,
+  ImageProfile,
+  ButtonLogout,
+} from './styles';
+
 export default function Profile() {
   const dispatch = useDispatch();
+  const {profile} = useSelector(state => state.user);
+
+  const dateFormated = useMemo(
+    () => format(parseISO(profile.created_at), 'dd/MM/yyyy', {locale: pt}),
+    [profile]
+  );
 
   return (
-    <View>
-      <Text>Profile</Text>
-      <Button
-        title="sair"
-        onPress={() => {
-          dispatch(singOut());
+    <Container>
+      <ImageProfile
+        source={{
+          uri:
+            profile.url ||
+            'https://api.adorable.io/avatars/100/rihor@rihor.io.png',
         }}
       />
-    </View>
+
+      <Info>
+        <Label>Nome completo</Label>
+        <Text>{profile.name}</Text>
+      </Info>
+
+      <Info>
+        <Label>E-mail</Label>
+        <Text>{profile.email}</Text>
+      </Info>
+
+      <Info>
+        <Label>Data de cadastro</Label>
+        <Text>{dateFormated}</Text>
+      </Info>
+
+      <ButtonLogout onPress={() => dispatch(singOut())}>Logout</ButtonLogout>
+    </Container>
   );
 }
