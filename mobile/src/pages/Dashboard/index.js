@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text} from 'react-native';
+import PropTypes from 'prop-types';
 
-import {Header} from '~/components';
+import {Header, Delivery} from '~/components';
 import {Container} from './styles';
 
 export default function Dashboard({navigation}) {
@@ -9,7 +9,13 @@ export default function Dashboard({navigation}) {
     <>
       <Container>
         <Header navigation={navigation} />
+
+        <Delivery />
       </Container>
     </>
   );
 }
+
+Dashboard.propTypes = {
+  navigation: PropTypes.func.isRequired,
+};
