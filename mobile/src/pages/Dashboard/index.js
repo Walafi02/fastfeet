@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 
-// import { Container } from './styles';
+import {Header} from '~/components';
+import {Container} from './styles';
 
-export default function Dashboard() {
+export default function Dashboard({navigation}) {
   return (
-    <View>
-      <Text>Dashboard</Text>
-    </View>
+    <>
+      <Container>
+        <Header navigation={navigation} />
+      </Container>
+    </>
   );
 }

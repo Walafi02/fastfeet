@@ -14,11 +14,6 @@ const Tabs = createBottomTabNavigator();
 export default function Routes() {
   const singed = useSelector(state => state.auth.singed);
 
-  // const singed = false;
-  useEffect(() => {
-    console.tron.log(singed);
-  }, [singed]);
-
   return (
     <NavigationContainer>
       {!singed ? (
@@ -26,7 +21,11 @@ export default function Routes() {
           <Stack.Screen name="SignIn" component={SignIn} />
         </Stack.Navigator>
       ) : (
-        <Tabs.Navigator>
+        <Tabs.Navigator
+          tabBarOptions={{
+            activeTintColor: '#7D40E7',
+            inactiveTintColor: '#999999',
+          }}>
           <Tabs.Screen
             name="Dashboard"
             component={Dashboard}
