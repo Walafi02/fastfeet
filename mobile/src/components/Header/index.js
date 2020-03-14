@@ -1,9 +1,10 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {CommonActions} from '@react-navigation/native';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import {deliveriesRequest} from '~/store/modules/deliveries/actions';
 
 import {
   Container,
@@ -23,6 +24,8 @@ import {
 
 export default function Header({navigation}) {
   const {profile} = useSelector(state => state.user);
+  const {status} = useSelector(state => state.deliveries);
+  const dispatch = useDispatch();
 
   function handleNavigate() {
     navigation.dispatch(
@@ -30,6 +33,10 @@ export default function Header({navigation}) {
         name: 'Profile',
       })
     );
+  }
+
+  function handleSearch(value = 'all') {
+    dispatch(deliveriesRequest(1, [], value));
   }
 
   return (
@@ -59,11 +66,15 @@ export default function Header({navigation}) {
         <HeaderListLabel>Entregas</HeaderListLabel>
 
         <HeaderListOptions>
-          <HeaderOption onPress={() => {}}>
-            <HeaderOptionText active>Pendentes</HeaderOptionText>
+          <HeaderOption onPress={() => handleSearch('progress')}>
+            <HeaderOptionText active={status === 'progress'}>
+              Pendentes
+            </HeaderOptionText>
           </HeaderOption>
-          <HeaderOption onPress={() => {}}>
-            <HeaderOptionText active={false}>Entregues</HeaderOptionText>
+          <HeaderOption onPress={() => handleSearch('done')}>
+            <HeaderOptionText active={status === 'done'}>
+              Entregues
+            </HeaderOptionText>
           </HeaderOption>
         </HeaderListOptions>
       </HeaderList>

@@ -22,10 +22,10 @@ const upload = multer(multerConfig);
 routes.post('/session', SessionController.store);
 routes.post('/deliveryman/session', DeliverymanDeliveriesController.store);
 
-// routes.get(
-//   '/deliveryman/:id/deliveries/:status',
-//   DeliverymanDeliveriesController.index
-// );
+routes.get(
+  '/deliveryman/:id/deliveries/:status?',
+  DeliverymanDeliveriesController.index
+);
 
 // routes.put(
 //   '/deliveryman/:id/deliveries/:delivery_id/start',

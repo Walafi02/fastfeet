@@ -13,13 +13,9 @@ class Delivery extends Model {
           type: Sequelize.VIRTUAL,
           get() {
             if (this.canceled_at) return 'canceled';
-            if (this.start_date) return 'progress';
             if (this.end_date) return 'done';
+            if (this.start_date) return 'progress';
             return `pedding`;
-            // done
-            // canceled
-            // progress
-            // pedding
           },
         },
       },

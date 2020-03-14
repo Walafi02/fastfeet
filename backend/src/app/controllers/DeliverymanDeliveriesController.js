@@ -4,7 +4,7 @@ import { Delivery, Recipient, Deliveryman, File } from '../models';
 
 class DeliverymanDeliveriesController {
   async index(req, res) {
-    const { id, status = 'done' } = req.params;
+    const { id, status = null } = req.params;
     const { page = 1, paginate = 10 } = req.query;
 
     const recipient = await Deliveryman.findByPk(id);
@@ -12,23 +12,48 @@ class DeliverymanDeliveriesController {
     if (!recipient)
       return res.status(400).json({ error: 'Deliveryman not found' });
 
+    let where = {
+      deliveryman_id: id,
+      canceled_at: null,
+    };
+
+    if (status === 'done') {
+      where = {
+        ...where,
+        start_date: {
+          [Op.ne]: null,
+        },
+        end_date: {
+          [Op.ne]: null,
+        },
+      };
+    }
+
+    if (status === 'progress') {
+      where = {
+        ...where,
+        start_date: {
+          [Op.ne]: null,
+        },
+        end_date: null,
+      };
+    }
+
     const deliverys = await Delivery.paginate({
-      where: {
-        deliveryman_id: id,
-        end_date:
-          status === 'done'
-            ? {
-                [Op.ne]: null,
-              }
-            : null,
-        canceled_at: null,
-      },
-      attributes: ['id', 'product', 'start_date', 'end_date'],
+      where,
+      attributes: [
+        'id',
+        'product',
+        'status',
+        'created_at',
+        'start_date',
+        'end_date',
+      ],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city'],
         },
       ],
       page,

@@ -12,8 +12,7 @@ export function* signIn({payload}) {
       id,
     });
 
-    // api.defaults.headers.Authorization = `Bearer ${token}`;
-    yield put(signInSuccess(id, data));
+    yield put(signInSuccess(data));
   } catch (error) {
     Alert.alert(
       'Falha na autenticação',
@@ -23,17 +22,4 @@ export function* signIn({payload}) {
   }
 }
 
-// export function setToken({payload}) {
-//   if (!payload) return;
-
-//   const {token} = payload.auth;
-
-//   if (token) {
-//     api.defaults.headers.Authorization = `Bearer ${token}`;
-//   }
-// }
-
-export default all([
-  // takeLatest('persist/REHYDRATE', setToken), // aaction lancada quando se tem um update de pagina
-  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
-]);
+export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);
