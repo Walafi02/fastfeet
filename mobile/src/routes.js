@@ -6,13 +6,54 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {SignIn, Dashboard, Profile} from '~/pages';
+import {SignIn, Dashboard, Profile, Details} from '~/pages';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 export default function Routes() {
   const singed = useSelector(state => state.auth.singed);
+
+  function DashboardTab() {
+    return (
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Navigator>
+    );
+  }
+
+  function tabs() {
+    return (
+      <Tabs.Navigator
+        tabBarOptions={{
+          activeTintColor: '#7D40E7',
+          inactiveTintColor: '#999',
+          keyboardHidesTabBar: true,
+        }}>
+        <Tabs.Screen
+          name="Dashboard"
+          component={DashboardTab}
+          options={{
+            tabBarLabel: 'Dashboard',
+            tabBarIcon: ({color}) => (
+              <Icon name="reorder" size={20} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Meu Perfil',
+            tabBarIcon: ({color}) => (
+              <Icon name="account-circle" size={20} color={color} />
+            ),
+          }}
+        />
+      </Tabs.Navigator>
+    );
+  }
 
   return (
     <NavigationContainer>
@@ -24,11 +65,12 @@ export default function Routes() {
         <Tabs.Navigator
           tabBarOptions={{
             activeTintColor: '#7D40E7',
-            inactiveTintColor: '#999999',
+            inactiveTintColor: '#999',
+            keyboardHidesTabBar: true,
           }}>
           <Tabs.Screen
             name="Dashboard"
-            component={Dashboard}
+            component={DashboardTab}
             options={{
               tabBarLabel: 'Dashboard',
               tabBarIcon: ({color}) => (

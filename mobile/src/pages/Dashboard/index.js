@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -38,6 +38,8 @@ export default function Dashboard({navigation}) {
           onEndReached={handleLoadMore}
           renderItem={({item}) => (
             <Delivery
+              navigation={navigation}
+              id={item.id}
               product={item.product}
               created_at={item.created_at}
               city={item.recipient.city}

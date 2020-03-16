@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import {format, parseISO} from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import PropTypes from 'prop-types';
+import {CommonActions} from '@react-navigation/native';
 
 import TimeLine from './TimeLine';
 
@@ -18,11 +19,26 @@ import {
   TextButtonShowDetails,
 } from './styles';
 
-export default function Delivery({product, created_at, city, status}) {
+export default function Delivery({
+  navigation,
+  id,
+  product,
+  created_at,
+  city,
+  status,
+}) {
   const dateFormated = useMemo(
     () => format(parseISO(created_at), 'dd/MM/yyyy', {locale: pt}),
     [created_at]
   );
+
+  function handlePress() {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'Details',
+      })
+    );
+  }
 
   return (
     <Container>
@@ -45,7 +61,7 @@ export default function Delivery({product, created_at, city, status}) {
           <Data>{city}</Data>
         </FooterView>
         <FooterView>
-          <ButtonShowDetails>
+          <ButtonShowDetails onPress={() => handlePress()}>
             <TextButtonShowDetails>Ver detalhes</TextButtonShowDetails>
           </ButtonShowDetails>
         </FooterView>
@@ -55,6 +71,10 @@ export default function Delivery({product, created_at, city, status}) {
 }
 
 Delivery.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired,
+  id: PropTypes.number.isRequired,
   product: PropTypes.string.isRequired,
   created_at: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
