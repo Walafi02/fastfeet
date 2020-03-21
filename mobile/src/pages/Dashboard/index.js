@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, Alert} from 'react-native';
+import {StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 

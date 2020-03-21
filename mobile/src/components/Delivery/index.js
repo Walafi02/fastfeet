@@ -32,10 +32,13 @@ export default function Delivery({
     [created_at]
   );
 
-  function handlePress() {
+  function handlePress(delivery_id) {
     navigation.dispatch(
       CommonActions.navigate({
         name: 'Details',
+        params: {
+          id: delivery_id,
+        },
       })
     );
   }
@@ -61,7 +64,7 @@ export default function Delivery({
           <Data>{city}</Data>
         </FooterView>
         <FooterView>
-          <ButtonShowDetails onPress={() => handlePress()}>
+          <ButtonShowDetails onPress={() => handlePress(id)}>
             <TextButtonShowDetails>Ver detalhes</TextButtonShowDetails>
           </ButtonShowDetails>
         </FooterView>

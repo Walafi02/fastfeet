@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, BackHandler} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {format, parseISO} from 'date-fns';
@@ -16,7 +16,7 @@ import {
   ButtonLogout,
 } from './styles';
 
-export default function Profile({navigation}) {
+export default function Profile() {
   const dispatch = useDispatch();
   const {profile} = useSelector(state => state.user);
 
@@ -26,12 +26,15 @@ export default function Profile({navigation}) {
   );
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', e => {
-      e.preventDefault();
-    });
+    function closeApp() {
+      BackHandler.exitApp();
+    }
+    BackHandler.addEventListener('hardwareBackPress', () => closeApp());
 
-    return unsubscribe;
-  }, [navigation]);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', () => closeApp());
+    };
+  }, []);
 
   return (
     <>

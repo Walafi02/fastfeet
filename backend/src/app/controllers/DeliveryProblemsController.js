@@ -8,11 +8,32 @@ class DeliveryProblemsController {
   async index(req, res) {
     const { page = 1, paginate = 10 } = req.query;
 
+    const { deliveryman_id, delivery_id } = req.params;
+
+    const deliveryman = await Deliveryman.findByPk(deliveryman_id);
+
+    if (!deliveryman)
+      return res.status(400).json({ error: 'Deliveryman not found' });
+
+    const delivery = await Delivery.findOne({
+      where: {
+        id: delivery_id,
+        deliveryman_id,
+      },
+    });
+
+    if (!delivery) return res.status(400).json({ error: 'Delivery not found' });
+
     const deliveryProblems = await DeliveryProblems.paginate({
-      attributes: ['id', 'description'],
+      where: {
+        delivery_id,
+      },
+      attributes: ['id', 'description', 'created_at'],
       page,
       paginate,
     });
+
+    // return res.json(deliveryProblems);
 
     return res.json(deliveryProblems);
   }

@@ -14,6 +14,7 @@ import {
   DeliveryStartController,
   DeliveryEndController,
   DeliveryProblemsController,
+  ProblemsController,
 } from './app/controllers';
 
 const routes = new Router();
@@ -21,6 +22,11 @@ const upload = multer(multerConfig);
 
 routes.post('/session', SessionController.store);
 routes.post('/deliveryman/session', DeliverymanDeliveriesController.store);
+
+routes.get(
+  '/deliveryman/:id/delivery/:id_deliveries',
+  DeliverymanDeliveriesController.show
+);
 
 routes.get(
   '/deliveryman/:id/deliveries/:status?',
@@ -37,10 +43,15 @@ routes.get(
 //   DeliveryEndController.update
 // );
 
-// routes.post(
-//   '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
-//   DeliveryProblemsController.store
-// );
+routes.post(
+  '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
+  DeliveryProblemsController.store
+);
+
+routes.get(
+  '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
+  DeliveryProblemsController.index
+);
 
 // routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
 
@@ -67,7 +78,7 @@ routes.get('/deliveries/:id', DeliveryController.show);
 routes.put('/deliveries/:id', DeliveryController.update);
 routes.delete('/deliveries/:id', DeliveryController.delete);
 
-routes.get('/problems', DeliveryProblemsController.index);
+routes.get('/problems', ProblemsController.index);
 routes.put(
   '/delivery/:problems_id/cancel-delivery',
   DeliveryProblemsController.update

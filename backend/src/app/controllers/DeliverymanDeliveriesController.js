@@ -92,6 +92,55 @@ class DeliverymanDeliveriesController {
 
     return res.json(deliveryman);
   }
+
+  async show(req, res) {
+    const { id, id_deliveries } = req.params;
+
+    const deliveryman = await Deliveryman.findByPk(id);
+
+    if (!deliveryman) {
+      return res.status(401).json({ error: 'Deliveryman not found' });
+    }
+
+    const delivery = await Delivery.findOne({
+      where: {
+        id: id_deliveries,
+        deliveryman_id: id,
+      },
+      attributes: [
+        'id',
+        'product',
+        'status',
+        'created_at',
+        'start_date',
+        'end_date',
+        'canceled_at',
+      ],
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'cep',
+            'address',
+          ],
+        },
+      ],
+    });
+
+    if (!delivery) {
+      return res.status(401).json({ error: 'delivery not found' });
+    }
+
+    return res.json(delivery);
+  }
 }
 
 export default new DeliverymanDeliveriesController();
