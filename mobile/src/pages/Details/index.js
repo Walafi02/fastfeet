@@ -43,11 +43,6 @@ export default function DetailsDelivery({navigation, route}) {
         end_date_formated: dateFormated(data.end_date),
         status_formated: statusFormated(data.status),
       });
-      console.tron.log('data', {
-        ...data,
-        start_date_formated: dateFormated(data.start_date),
-        end_date_formated: dateFormated(data.end_date),
-      });
     } catch (error) {
       navigation.dispatch(
         CommonActions.navigate({
@@ -83,7 +78,9 @@ export default function DetailsDelivery({navigation, route}) {
     );
   }
 
-  function handleDone() {}
+  function handleDone() {
+    console.tron.log('Done');
+  }
 
   useEffect(() => {
     if (id && delivery_id) loadingData();
@@ -139,7 +136,9 @@ export default function DetailsDelivery({navigation, route}) {
             </DoubleColumn>
 
             <Buttons>
-              <Button onPress={handleOpenProblemForm}>
+              <Button
+                onPress={handleOpenProblemForm}
+                disabled={details.status === 'done'}>
                 <Icon name="highlight-off" size={30} color="#E74040" />
                 <ButtonText>Informar Problema</ButtonText>
               </Button>
@@ -147,7 +146,9 @@ export default function DetailsDelivery({navigation, route}) {
                 <Icon name="info-outline" size={30} color="#E7BA40" />
                 <ButtonText>Visualizar Problemas</ButtonText>
               </Button>
-              <Button onPress={handleDone}>
+              <Button
+                onPress={handleDone}
+                disabled={details.status !== 'progress'}>
                 <Icon name="check-circle" size={30} color="#7d40e7" />
                 <ButtonText>Confirmar Entrega</ButtonText>
               </Button>

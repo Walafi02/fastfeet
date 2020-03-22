@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
-import {RectButton} from 'react-native-gesture-handler';
 import {ActivityIndicator} from 'react-native';
-
-// import {Button as RectButton} from '~/components';
 
 export const Container = styled.ScrollView`
   background: #fff;
@@ -48,13 +45,13 @@ export const Buttons = styled.View`
   flex-direction: row;
 `;
 
-export const Button = styled(RectButton)`
+export const Button = styled.TouchableOpacity.attrs({})`
   flex: 1;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background: #0000001a;
-  border: 1px solid #999999;
+  background: ${props => (!props.disabled ? '#eee' : '#ccc')};
+  border: 1px solid #ddd;
   border-radius: 4px;
 `;
 

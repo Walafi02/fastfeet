@@ -14,6 +14,7 @@ import {
   Details,
   ProblemForm,
   ProblemList,
+  ConfirmDelivery,
 } from '~/pages';
 
 const Stack = createStackNavigator();
@@ -39,7 +40,7 @@ function DashboardTab({navigation}) {
           </TouchableOpacity>
         ),
       }}
-      initialRouteName="Dashboard">
+      initialRouteName="ConfirmDelivery">
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
@@ -66,6 +67,13 @@ function DashboardTab({navigation}) {
         component={ProblemList}
         options={{
           title: 'Visualizar problemas',
+        }}
+      />
+      <Stack.Screen
+        name="ConfirmDelivery"
+        component={ConfirmDelivery}
+        options={{
+          title: 'Confirmar entrega',
         }}
       />
     </Stack.Navigator>
