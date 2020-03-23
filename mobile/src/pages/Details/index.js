@@ -118,8 +118,14 @@ export default function DetailsDelivery({navigation, route}) {
   }
 
   useEffect(() => {
-    if (id && delivery_id) loadingData();
-  }, [id, delivery_id]); // eslint-disable-line
+    navigation.addListener('focus', () => {
+      // do something
+      // console.tron.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
+      loadingData();
+    });
+
+    // if (id && delivery_id) loadingData();
+  }, []); // eslint-disable-line
 
   return (
     <Background>

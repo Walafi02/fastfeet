@@ -31,7 +31,6 @@ export default function Camera({selectImage, closeCamera}) {
   async function takePicture(camera) {
     const options = {quality: 0.5, base64: true};
     const data = await camera.takePictureAsync(options);
-    console.tron.log(data);
     selectImage(data.uri);
     closeCamera();
   }

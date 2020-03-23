@@ -24,7 +24,6 @@ class DeliveryEndController {
       signature_id: Yup.number(),
     });
 
-    console.log('signature_id'.signature_id);
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Validation fields' });
 
@@ -32,7 +31,7 @@ class DeliveryEndController {
 
     const deliveryUpdated = await delivery.update(
       {
-        canceled_at: new Date(),
+        end_date: new Date(),
         signature_id,
       },
       {
