@@ -33,15 +33,15 @@ routes.get(
   DeliverymanDeliveriesController.index
 );
 
-// routes.put(
-//   '/deliveryman/:id/deliveries/:delivery_id/start',
-//   DeliveryStartController.update
-// );
+routes.put(
+  '/deliveryman/:id/deliveries/:delivery_id/start',
+  DeliveryStartController.update
+);
 
-// routes.put(
-//   '/deliveryman/:id/deliveries/:delivery_id/end',
-//   DeliveryEndController.update
-// );
+routes.put(
+  '/deliveryman/:id/deliveries/:delivery_id/end',
+  DeliveryEndController.update
+);
 
 routes.post(
   '/deliveryman/:deliveryman_id/delivery/:delivery_id/problems',
@@ -53,11 +53,12 @@ routes.get(
   DeliveryProblemsController.index
 );
 
-// routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
+routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
+
+routes.post('/files', upload.single('file'), FileController.store);
 
 routes.use(authMiddleware);
 
-routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/files/:id', FileController.show);
 
 routes.get('/recipient', RecipientController.index);

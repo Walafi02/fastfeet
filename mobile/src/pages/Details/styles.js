@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import {ActivityIndicator} from 'react-native';
 
+import {Button as StartDeliveryButton} from '~/components';
+
 export const Container = styled.ScrollView`
   background: #fff;
   margin: 0 16px;
@@ -63,4 +65,8 @@ export const ButtonText = styled.Text`
 
 export const Loading = styled(ActivityIndicator)`
   margin-top: 20px;
+`;
+
+export const ButtonStartDelivery = styled(StartDeliveryButton)`
+  background: #7d40e7;
 `;

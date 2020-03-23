@@ -21,6 +21,7 @@ import {
   Button,
   ButtonText,
   Loading,
+  ButtonStartDelivery,
 } from './styles';
 
 export default function DetailsDelivery({navigation, route}) {
@@ -79,7 +80,41 @@ export default function DetailsDelivery({navigation, route}) {
   }
 
   function handleDone() {
-    console.tron.log('Done');
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'ConfirmDelivery',
+        params: {
+          delivery_id,
+        },
+      })
+    );
+  }
+
+  async function confirmStartDelivery() {
+    try {
+      await api.put(`deliveryman/${id}/deliveries/${delivery_id}/start`);
+
+      loadingData();
+    } catch (error) {
+      Alert.alert(
+        'Error',
+        `${error.response.data.error || 'verifique seus dados'}`
+      );
+    }
+  }
+
+  function handleStartDelivery() {
+    Alert.alert(
+      'Retirada de Produto',
+      'Deseja Retirar esse produto?',
+      [
+        {
+          text: 'Não',
+        },
+        {text: 'Sim', onPress: () => confirmStartDelivery()},
+      ],
+      {cancelable: false}
+    );
   }
 
   useEffect(() => {
@@ -135,24 +170,30 @@ export default function DetailsDelivery({navigation, route}) {
               </Card>
             </DoubleColumn>
 
-            <Buttons>
-              <Button
-                onPress={handleOpenProblemForm}
-                disabled={details.status === 'done'}>
-                <Icon name="highlight-off" size={30} color="#E74040" />
-                <ButtonText>Informar Problema</ButtonText>
-              </Button>
-              <Button onPress={handleOpenProblemList}>
-                <Icon name="info-outline" size={30} color="#E7BA40" />
-                <ButtonText>Visualizar Problemas</ButtonText>
-              </Button>
-              <Button
-                onPress={handleDone}
-                disabled={details.status !== 'progress'}>
-                <Icon name="check-circle" size={30} color="#7d40e7" />
-                <ButtonText>Confirmar Entrega</ButtonText>
-              </Button>
-            </Buttons>
+            {details.status === 'pedding' ? (
+              <ButtonStartDelivery onPress={handleStartDelivery}>
+                Retirar Produto
+              </ButtonStartDelivery>
+            ) : (
+              <Buttons>
+                <Button
+                  onPress={handleOpenProblemForm}
+                  disabled={details.status === 'done'}>
+                  <Icon name="highlight-off" size={30} color="#E74040" />
+                  <ButtonText>Informar Problema</ButtonText>
+                </Button>
+                <Button onPress={handleOpenProblemList}>
+                  <Icon name="info-outline" size={30} color="#E7BA40" />
+                  <ButtonText>Visualizar Problemas</ButtonText>
+                </Button>
+                <Button
+                  onPress={handleDone}
+                  disabled={details.status !== 'progress'}>
+                  <Icon name="check-circle" size={30} color="#7d40e7" />
+                  <ButtonText>Confirmar Entrega</ButtonText>
+                </Button>
+              </Buttons>
+            )}
           </>
         )}
       </Container>

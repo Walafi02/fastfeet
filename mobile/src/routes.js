@@ -40,7 +40,7 @@ function DashboardTab({navigation}) {
           </TouchableOpacity>
         ),
       }}
-      initialRouteName="ConfirmDelivery">
+      initialRouteName="Dashboard">
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
