@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Alert, ActivityIndicator} from 'react-native';
 import {useSelector} from 'react-redux';
 import {CommonActions} from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 import {Background, Camera} from '~/components';
@@ -18,7 +19,6 @@ import {
 export default function ConfirmDelivery({navigation, route}) {
   const {id} = useSelector(state => state.user.profile);
   const {delivery_id} = route.params;
-  // const [imageID, setImageID] = useState();
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState();
   const [openCamera, setOpenCamera] = useState(false);
@@ -43,7 +43,7 @@ export default function ConfirmDelivery({navigation, route}) {
 
   async function handleDone() {
     setLoading(true);
-    let imageID;
+    const params = {};
 
     try {
       if (image) {
@@ -55,13 +55,10 @@ export default function ConfirmDelivery({navigation, route}) {
         });
 
         const response = await api.post('files', data);
-
-        imageID = response.data.id;
+        params.signature_id = response.data.id;
       }
 
-      await api.put(`deliveryman/${id}/deliveries/${delivery_id}/end`, {
-        signature_id: imageID || null,
-      });
+      await api.put(`deliveryman/${id}/deliveries/${delivery_id}/end`, params);
 
       navigation.dispatch(
         CommonActions.navigate({
@@ -108,3 +105,14 @@ export default function ConfirmDelivery({navigation, route}) {
     </>
   );
 }
+
+ConfirmDelivery.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      delivery_id: PropTypes.number,
+    }),
+  }).isRequired,
+};

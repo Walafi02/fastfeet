@@ -21,7 +21,9 @@ export default function Dashboard({navigation}) {
   }
 
   useEffect(() => {
-    dispatch(deliveriesRequest());
+    navigation.addListener('focus', () => {
+      dispatch(deliveriesRequest());
+    });
   }, []); // eslint-disable-line
 
   return (
@@ -55,5 +57,6 @@ export default function Dashboard({navigation}) {
 Dashboard.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func.isRequired,
+    addListener: PropTypes.func.isRequired,
   }).isRequired,
 };

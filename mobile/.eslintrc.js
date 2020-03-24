@@ -39,7 +39,8 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "import/no-cycle": "off"
   },
   settings: {
     "import/resolver": {

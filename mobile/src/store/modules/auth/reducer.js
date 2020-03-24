@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  singed: true,
+  singed: false,
   loading: false,
 };
 

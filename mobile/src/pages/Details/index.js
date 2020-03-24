@@ -119,12 +119,8 @@ export default function DetailsDelivery({navigation, route}) {
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      // do something
-      // console.tron.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
       loadingData();
     });
-
-    // if (id && delivery_id) loadingData();
   }, []); // eslint-disable-line
 
   return (
@@ -210,6 +206,7 @@ export default function DetailsDelivery({navigation, route}) {
 DetailsDelivery.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func.isRequired,
+    addListener: PropTypes.func.isRequired,
   }).isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({

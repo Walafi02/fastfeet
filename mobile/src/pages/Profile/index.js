@@ -15,6 +15,7 @@ import {
   ImageProfile,
   ButtonLogout,
 } from './styles';
+import {InitialLetters} from '~/components';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -40,13 +41,11 @@ export default function Profile() {
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <Container>
-        <ImageProfile
-          source={{
-            uri:
-              profile.url ||
-              `https://api.adorable.io/avatars/100/${profile.name}.io.png`,
-          }}
-        />
+        {profile && profile.avatar && profile.avatar.url ? (
+          <ImageProfile source={{uri: profile.avatar.url}} />
+        ) : (
+          <InitialLetters name={profile.name} />
+        )}
 
         <Info>
           <Label>Nome completo</Label>

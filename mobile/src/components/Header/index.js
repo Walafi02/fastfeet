@@ -5,6 +5,7 @@ import {CommonActions} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {deliveriesRequest} from '~/store/modules/deliveries/actions';
+import {InitialLetters} from '~/components';
 
 import {
   Container,
@@ -43,13 +44,17 @@ export default function Header({navigation}) {
     <Container>
       <Welcome>
         <WelcomeProfile>
-          <ImageProfile
-            source={{
-              uri:
-                profile.url ||
-                `https://api.adorable.io/avatars/100/${profile.name}.io.png`,
-            }}
-          />
+          {profile && profile.avatar && profile.avatar.url ? (
+            <ImageProfile source={{uri: profile.avatar.url}} />
+          ) : (
+            <InitialLetters
+              name={profile.name}
+              width={80}
+              height={80}
+              borderRadius={40}
+              fontSize={40}
+            />
+          )}
 
           <WelcomeData>
             <WelcomeLabel>Bem vindo de volta,</WelcomeLabel>
