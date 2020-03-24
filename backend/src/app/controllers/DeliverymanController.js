@@ -1,5 +1,7 @@
 import { Op } from 'sequelize';
 import * as Yup from 'yup';
+import Queue from '../../lib/Queue';
+import { DeliveryManCreated } from '../../jobs';
 
 import { Deliveryman, File } from '../models';
 
@@ -55,6 +57,8 @@ class DeliverymanController {
       return res.status(400).json({ error: 'Deliveryman already exists.' });
 
     const { id, name, avatar_id } = await Deliveryman.create(req.body);
+
+    await Queue.add(DeliveryManCreated.key, { id, name, email });
 
     return res.json({ id, name, email, avatar_id });
   }

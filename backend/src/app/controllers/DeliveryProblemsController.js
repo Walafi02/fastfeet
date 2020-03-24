@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import { Delivery, Deliveryman, DeliveryProblems, Recipient } from '../models';
 
+import { Delivery, Deliveryman, DeliveryProblems } from '../models';
 import Queue from '../../lib/Queue';
 import { DeliveryAlertCanceled } from '../../jobs';
 
@@ -32,8 +32,6 @@ class DeliveryProblemsController {
       page,
       paginate,
     });
-
-    // return res.json(deliveryProblems);
 
     return res.json(deliveryProblems);
   }
@@ -101,7 +99,15 @@ class DeliveryProblemsController {
 
     const { delivery_id } = deliveryProblems;
 
-    const delivery = await Delivery.findByPk(delivery_id);
+    const delivery = await Delivery.findByPk(delivery_id, {
+      include: [
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['id', 'name', 'email'],
+        },
+      ]
+    });
 
     if (!delivery) return res.status(400).json({ error: 'Delivery not found' });
 
@@ -113,6 +119,8 @@ class DeliveryProblemsController {
         new: true,
       }
     );
+
+    await Queue.add(DeliveryAlertCanceled.key, { product: delivery.product, deliveryman: delivery.deliveryman  });
 
     return res.json(deliveryUpdated);
   }

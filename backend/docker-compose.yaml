@@ -11,7 +11,7 @@ services:
     depends_on:
       - fastfeet-postgres
       - fastfeet-redis
-      # - fastfeet-job
+      - fastfeet-job
     networks:
       - app-connect
     ports:
@@ -31,14 +31,14 @@ services:
     ports:
       - '5432:5432'
 
-  # fastfeet-job:
-  #   container_name: fastfeet-job
-  #   build: .
-  #   command: yarn queue
-  #   depends_on:
-  #     - fastfeet-redis
-  #   networks:
-  #     - app-connect
+  fastfeet-job:
+    container_name: fastfeet-job
+    build: .
+    command: yarn queue
+    depends_on:
+      - fastfeet-redis
+    networks:
+      - app-connect
 
   fastfeet-redis:
     container_name: fastfeet-redis
