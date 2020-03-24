@@ -43,11 +43,11 @@ Faça um clone desse repositório
   2. A partir da raiz do projeto Execulte `docker-compose up`
 
   ### Mobile
-  <!-- 1. A partir da raiz do projeto, entre na pasta rodando `cd mobile`;
-  2. Execulte `npm install` para instalar as dependências;
-  3. Execulte `npm run start` para iniciar o servidor de desenvolvimento;
+  1. A partir da raiz do projeto, entre na pasta rodando `cd mobile`;
+  2. Execulte `npm install` ou `yarn` para instalar as dependências;
+  3. Execulte `npm run start` ou `yarn start` para iniciar o servidor de desenvolvimento;
   4. Cheque o ip do servidor e substitua `localhost` do atributo `baseURL` no arquivo `src > services > api.js`;
-  5. Execulte `npm run android` para iniciar a instalação no smartphone; -->
+  5. Execulte `npm run android` ou `yarn android` para iniciar a instalação no smartphone;
   
   <i>Obs.:</i> Projeto mobile desenvolvido apenas para a plataforma <strong>android</strong>.
 
