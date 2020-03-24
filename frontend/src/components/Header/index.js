@@ -28,7 +28,7 @@ export default function Header() {
             Destinatário
           </NavLink>
           <NavLink to="/problems" activeClassName="selected">
-            Problémas
+            Problemas
           </NavLink>
         </nav>
 

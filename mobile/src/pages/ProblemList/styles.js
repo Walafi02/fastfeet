@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import RNIcon from 'react-native-vector-icons/MaterialIcons';
+
 export const Title = styled.Text`
   font-weight: bold;
   font-size: 18px;
@@ -42,4 +44,24 @@ export const ViewProblemsDate = styled.View`
 export const ProblemsDate = styled.Text`
   color: #c1c1c1;
   font-size: 14px;
+`;
+
+export const EmptyProblems = styled.View`
+  flex: 1;
+  background: #fff;
+  margin: 0 16px;
+  border-radius: 4px;
+  border: 1px solid #0000001a;
+  justify-content: center;
+`;
+
+export const Icon = styled(RNIcon).attrs({})`
+  text-align: center;
+`;
+
+export const EmptyProblemsText = styled.Text`
+  text-align: center;
+  color: #0000001a;
+  font-weight: bold;
+  font-size: 20px;
 `;

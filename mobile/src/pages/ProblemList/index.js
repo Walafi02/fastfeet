@@ -14,6 +14,9 @@ import {
   ProblemsDate,
   ViewProblemsDescription,
   ViewProblemsDate,
+  EmptyProblems,
+  Icon,
+  EmptyProblemsText,
 } from './styles';
 
 export default function ProblemList({route}) {
@@ -60,26 +63,33 @@ export default function ProblemList({route}) {
     <Background>
       <>
         <Title>{product}</Title>
-        <ProblemsList
-          data={problems}
-          keyExtractor={item => String(item.id)}
-          onRefresh={refreshList}
-          refreshing={false}
-          onEndReachedThreshold={0.2}
-          onEndReached={loadMore}
-          renderItem={({item}) => (
-            <Problem>
-              <ViewProblemsDescription>
-                <TextProblemsDescription>
-                  {item.description}
-                </TextProblemsDescription>
-              </ViewProblemsDescription>
-              <ViewProblemsDate>
-                <ProblemsDate>{item.dateFormated}</ProblemsDate>
-              </ViewProblemsDate>
-            </Problem>
-          )}
-        />
+        {problems.length > 0 ? (
+          <ProblemsList
+            data={problems}
+            keyExtractor={item => String(item.id)}
+            onRefresh={refreshList}
+            refreshing={false}
+            onEndReachedThreshold={0.2}
+            onEndReached={loadMore}
+            renderItem={({item}) => (
+              <Problem>
+                <ViewProblemsDescription>
+                  <TextProblemsDescription>
+                    {item.description}
+                  </TextProblemsDescription>
+                </ViewProblemsDescription>
+                <ViewProblemsDate>
+                  <ProblemsDate>{item.dateFormated}</ProblemsDate>
+                </ViewProblemsDate>
+              </Problem>
+            )}
+          />
+        ) : (
+          <EmptyProblems>
+            <Icon name="report-problem" size={100} color="#0000001a" />
+            <EmptyProblemsText>Sem Problemas Cadastrados</EmptyProblemsText>
+          </EmptyProblems>
+        )}
       </>
     </Background>
   );

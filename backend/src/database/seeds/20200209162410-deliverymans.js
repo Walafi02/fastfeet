@@ -9,7 +9,11 @@ module.exports = {
     for (let i = 1; i <= 100; i++) {
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
-      const email = faker.internet.email(firstName, lastName);
+      const number = faker.random.number({
+        min: 1,
+        max: 10,
+      });
+      const email = faker.internet.email(firstName, `${lastName}${number}`);
 
       deliverymans.push({
         name: `${firstName} ${lastName}`,
