@@ -23,7 +23,10 @@ class DeliverymanController {
       },
       page,
       paginate,
-      // order: [['createdAt', 'DESC']],
+      order: [
+        ['createdAt', 'DESC'],
+        ['id', 'ASC'],
+      ],
     });
 
     return res.json(deliverymans);

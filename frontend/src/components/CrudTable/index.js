@@ -13,6 +13,7 @@ import Table from './Table';
 import Pagination from './Pagination';
 
 import ReactModal from '~/components/ReactModal';
+import Image from '~/components/Image';
 
 export default function CRUDTable({ entity, actions, searchBar }) {
   const [docs, setDocs] = useState([]);
@@ -150,17 +151,21 @@ export default function CRUDTable({ entity, actions, searchBar }) {
                     </div>
                   ) : (
                     <>
-                      itemToView.start_date && (
-                      <div>
-                        <strong>Retirada: </strong>
-                        {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
-                      </div>
-                      ) itemToView.start_date && (
-                      <div>
-                        <strong>Entrega: </strong>
-                        {format(parseISO(itemToView.start_date), 'dd/MM/yyyy')}
-                      </div>
-                      )
+                      {itemToView.start_date && (
+                        <div>
+                          <strong>Retirada: </strong>
+                          {format(
+                            parseISO(itemToView.start_date),
+                            'dd/MM/yyyy'
+                          )}
+                        </div>
+                      )}
+                      {itemToView.end_date && (
+                        <div>
+                          <strong>Entrega: </strong>
+                          {format(parseISO(itemToView.end_date), 'dd/MM/yyyy')}
+                        </div>
+                      )}
                     </>
                   )}
                 </div>
@@ -171,6 +176,10 @@ export default function CRUDTable({ entity, actions, searchBar }) {
                 <br />
                 <div>
                   <strong>Assinatura do destinatário</strong>
+                  <Image
+                    src={itemToView.signature.url}
+                    alt={itemToView.signature.path}
+                  />
                 </div>
               </>
             )}

@@ -54,7 +54,6 @@ routes.get(
 );
 
 routes.get('/delivery/:id/problems', DeliveryProblemsController.show);
-
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.use(authMiddleware);

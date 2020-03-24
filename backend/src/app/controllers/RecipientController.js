@@ -24,7 +24,10 @@ class RecipientController {
       },
       page,
       paginate,
-      order: [['updated_at', 'DESC']],
+      order: [
+        ['updated_at', 'DESC'],
+        ['id', 'ASC'],
+      ],
     });
 
     return res.json(recipients);

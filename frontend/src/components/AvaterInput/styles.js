@@ -22,5 +22,24 @@ export const Container = styled.div`
     input {
       display: none;
     }
+
+    span {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        height: 127px;
+        width: 127px;
+        color: #dddddd;
+      }
+
+      span {
+        color: #dddddd;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
   }
 `;

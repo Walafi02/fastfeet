@@ -37,7 +37,7 @@ class DeliveryController {
             {
               model: File,
               as: 'avatar',
-              attributes: ['url'],
+              attributes: ['id', 'path', 'url'],
             },
           ],
         },
@@ -49,7 +49,10 @@ class DeliveryController {
       ],
       page,
       paginate,
-      order: [['updated_at', 'DESC']],
+      order: [
+        ['updated_at', 'DESC'],
+        ['id', 'ASC'],
+      ],
     });
 
     return res.json(deliverys);

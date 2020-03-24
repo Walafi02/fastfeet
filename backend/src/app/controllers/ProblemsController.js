@@ -8,6 +8,10 @@ class ProblemsController {
       attributes: ['id', 'description'],
       page,
       paginate,
+      order: [
+        ['updated_at', 'DESC'],
+        ['id', 'ASC'],
+      ],
     });
 
     return res.json(deliveryProblems);

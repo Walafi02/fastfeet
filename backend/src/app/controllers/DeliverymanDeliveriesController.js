@@ -81,7 +81,7 @@ class DeliverymanDeliveriesController {
         {
           model: File,
           as: 'avatar',
-          attributes: ['url'],
+          attributes: ['id', 'path', 'url'],
         },
       ],
     });

@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 
+import { MdInsertPhoto } from 'react-icons/md';
+
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -47,12 +49,14 @@ export default function AvatarInput({ name }) {
   return (
     <Container>
       <label htmlFor="avatar">
-        <img
-          src={
-            preview || 'https://api.adorable.io/avatars/100/rihor@rihor.io.png'
-          }
-          alt=""
-        />
+        {preview ? (
+          <img src={preview} alt="avatar" />
+        ) : (
+          <span>
+            <MdInsertPhoto />
+            <span>Adicionar foto</span>
+          </span>
+        )}
 
         <input
           type="file"
