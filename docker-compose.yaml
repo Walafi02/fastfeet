@@ -1,20 +1,6 @@
 version: '3'
 
 services:
-  fastfeet-mobile:
-    container_name: fastfeet-mobile
-    build: './mobile'
-    entrypoint: ['./init.sh']
-    volumes:
-      - ./mobile:/home/node/api
-      - /home/node/api/node_modules
-    depends_on:
-      - fastfeet-backend
-    networks:
-      - app-connect
-    ports:
-      - '8081:8081'
-      
   fastfeet-frontend:
     container_name: fastfeet-frontend
     build: ./frontend
