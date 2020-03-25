@@ -4,4 +4,5 @@ yarn
 yarn migrate:undo
 yarn migrate
 yarn seed
-yarn dev
+# yarn dev
+yarn prod
