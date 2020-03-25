@@ -4,7 +4,10 @@ services:
   fastfeet-mobile:
     container_name: fastfeet-mobile
     build: './mobile'
-    command: yarn && yarn start
+    entrypoint: ['./init.sh']
+    volumes:
+      - ./mobile:/home/node/api
+      - /home/node/api/node_modules
     depends_on:
       - fastfeet-backend
     networks:
