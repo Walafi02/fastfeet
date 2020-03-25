@@ -4,7 +4,7 @@ services:
   fastfeet-mobile:
     container_name: fastfeet-mobile
     build: './mobile'
-    command: yarn start
+    command: yarn && yarn start
     depends_on:
       - fastfeet-backend
     networks:
