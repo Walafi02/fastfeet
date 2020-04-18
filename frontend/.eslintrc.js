@@ -45,7 +45,9 @@ module.exports = {
     "radix": "off",
     "react/forbid-prop-types": "off",
     "no-unused-expressions": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
   },
   settings: {
     "import/resolver": {

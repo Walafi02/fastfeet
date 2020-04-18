@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -45,7 +44,13 @@ export default function CRUDTable({ entity, actions, searchBar }) {
       setDocs(data.docs);
       setTotalPages(data.pages);
     } catch (error) {
-      toast.error(error.response.data.error || 'Error Interno.');
+      toast.error(
+        (error &&
+          error.response &&
+          error.response.data &&
+          error.response.data.error) ||
+          'Error Interno.'
+      );
     } finally {
       setLoading(false);
     }
@@ -80,6 +85,9 @@ export default function CRUDTable({ entity, actions, searchBar }) {
     try {
       await api.put(`/delivery/${id}/cancel-delivery`);
       toast.success('Cancelado!');
+      load(
+        docs.length === 1 && currentPage > 1 ? currentPage - 1 : currentPage
+      );
     } catch (error) {
       toast.error(error.response.data.error || 'Error Interno.');
     }

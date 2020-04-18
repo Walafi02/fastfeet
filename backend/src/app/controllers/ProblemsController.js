@@ -1,4 +1,4 @@
-import { DeliveryProblems } from '../models';
+import { DeliveryProblems, Delivery } from '../models';
 
 class ProblemsController {
   async index(req, res) {
@@ -12,6 +12,14 @@ class ProblemsController {
         ['updated_at', 'DESC'],
         ['id', 'ASC'],
       ],
+      include: [{
+        model: Delivery,
+        attributes: ['id', 'canceled_at'],
+        as: 'delivery',
+        where: {
+          canceled_at: null,
+        }
+      }]
     });
 
     return res.json(deliveryProblems);

@@ -30,7 +30,6 @@ export default function SignIn() {
         className="flex flex-column"
         schema={schema}
         onSubmit={handleSubmit}
-        initialData={{ email: 'admin@fastfeet.com', password: '123456' }}
       >
         <Input
           label="seu e-mail"

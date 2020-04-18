@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -88,7 +86,12 @@ export default function Item({
             )}
 
             {actions.includes(crudActions.CANCEL) && (
-              <span onClick={() => onCancel(item.id)}>
+              <span
+                onClick={() => {
+                  setOpen(false);
+                  onCancel(item.id);
+                }}
+              >
                 <MdDeleteForever size={23} color="#DE3B3B" />
                 Cancelar
               </span>
